@@ -6,11 +6,16 @@ import Content from './components/Content/Content.jsx';
 import Footer from './components/Footer/Footer';
 
 const App = () => {
+  const [posts, setPosts] = React.useState([
+    {id: 1, completed: false, title: 'How are you?'},
+    {id: 2, completed: false, title: 'Hello, it is my first post!'},
+  ]);
+
   return (
     <div className='App'>
       <Navbar/>
       <Header/>
-      <Content/>
+      <Content posts={posts}/>
       <div className='App-empty'/>
       <Footer/>
     </div>

@@ -1,12 +1,17 @@
 import React from 'react';
 import style from './Secret.module.css';
+import PropTypes from 'prop-types';
 
-const Secret = () => {
+const Secret = ({content}) => {
   return (
     <div className={style.secret}>
-      Secret
+      {content}
     </div>
   );
+};
+
+Secret.propTypes = {
+  content: PropTypes.string,
 };
 
 export default Secret;
