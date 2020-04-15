@@ -1,9 +1,9 @@
 import React from 'react';
-import style from './Profile.module.css';
+import style from './Content.module.css';
 import SecretBox from './SecretsBox/SecretBox';
 import Information from './Information/Information';
 
-const Profile = () => {
+const Content = () => {
   return (
     <div className={style.profile}>
       <Information/>
@@ -12,4 +12,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Content;
