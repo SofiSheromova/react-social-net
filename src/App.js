@@ -15,7 +15,7 @@ const App = () => {
     <div className='App'>
       <Navbar/>
       <Header/>
-      <Content posts={posts}/>
+      <Content posts={posts} setPosts={setPosts}/>
       <div className='App-empty'/>
       <Footer/>
     </div>
