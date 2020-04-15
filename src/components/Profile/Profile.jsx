@@ -1,14 +1,13 @@
 import React from 'react';
 import style from './Profile.module.css';
+import SecretBox from './SecretsBox/SecretBox';
+import Information from './Information/Information';
 
 const Profile = () => {
   return (
     <div className={style.profile}>
-      <div>description</div>
-      <div>photo</div>
-      <div>my secrets</div>
-      <div>add secrets</div>
-      <div>secrets</div>
+      <Information/>
+      <SecretBox/>
     </div>
   );
 };
