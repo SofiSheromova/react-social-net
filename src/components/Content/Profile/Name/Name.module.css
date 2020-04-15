@@ -1,0 +1,5 @@
+.name {
+    grid-area: name;
+    /*grid-column: 1 / 8;*/
+    /*grid-row: 1;*/
+}

@@ -1,7 +1,0 @@
-.info {
-    display: grid;
-    grid-template-areas: "description avatar";
-    grid-template-rows: 1fr;
-    grid-template-columns: 8fr 4fr;
-    min-height: 30vh;
-}
