@@ -1,4 +1,15 @@
 .nav {
+    padding: 50px 0;
+    text-align: center;
     grid-area: nav;
-    background: #cdb5c3;
+    background: #eedcd8;
+    font-size: 20px;
+}
+
+.item {
+    margin: 15px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 15px;
+    border: #8e5678 dashed 1px;
 }
