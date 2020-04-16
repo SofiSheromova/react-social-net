@@ -15,3 +15,10 @@
     grid-area: empty;
     background: #eedcd8;
 }
+
+.profile {
+    grid-area: content;
+    background: #ffffff;
+    margin: 10px;
+}
+
