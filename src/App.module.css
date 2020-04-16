@@ -6,17 +6,12 @@
     grid-template-columns: 2fr 8fr 2fr;
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
-
-.App-empty {
+.empty {
     grid-area: empty;
     background: #eedcd8;
 }
 
-.profile {
+.content {
     grid-area: content;
     background: #ffffff;
     margin: 10px;

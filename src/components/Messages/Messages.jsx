@@ -4,11 +4,6 @@ import PropTypes from 'prop-types';
 import Message from './Message/Message';
 
 const Messages = ({messages, setMessages}) => {
-  messages = [
-    {id: 1, content: 'Hello'},
-    {id: 2, content: 'What is yor name?'},
-  ];
-
   return (
     <div className={style.profile}>
       <span>Your messages are here</span>
