@@ -1,6 +1,5 @@
 import React from 'react';
 import style from './Content.module.css';
-import SecretBox from './SecretsBox/SecretBox.jsx';
 import Profile from './Profile/Profile.jsx';
 import PropTypes from 'prop-types';
 import {Route} from 'react-router-dom';
@@ -10,8 +9,7 @@ const Content = ({posts, setPosts}) => {
   return (
     <div className={style.profile}>
       <Route path='/profile'>
-        <Profile/>
-        <SecretBox posts={posts} setPosts={setPosts}/>
+        <Profile posts={posts} setPosts={setPosts}/>
       </Route>
       <Route path='/messages'>
         <Messages setMessages={undefined} messages={[]}/>
