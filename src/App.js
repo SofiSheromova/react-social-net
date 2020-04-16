@@ -4,6 +4,7 @@ import Header from './components/Header/Header.jsx';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Content from './components/Content/Content.jsx';
 import Footer from './components/Footer/Footer';
+import {BrowserRouter} from 'react-router-dom';
 
 const App = () => {
   const [posts, setPosts] = React.useState([
@@ -13,11 +14,13 @@ const App = () => {
 
   return (
     <div className='App'>
-      <Navbar/>
-      <Header/>
-      <Content posts={posts} setPosts={setPosts}/>
-      <div className='App-empty'/>
-      <Footer/>
+      <BrowserRouter>
+        <Navbar/>
+        <Header/>
+        <Content posts={posts} setPosts={setPosts}/>
+        <div className='App-empty'/>
+        <Footer/>
+      </BrowserRouter>
     </div>
   );
 };
