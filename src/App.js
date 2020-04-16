@@ -13,9 +13,10 @@ const App = () => {
     {id: 2, completed: false, title: 'Hello, it is my first post!'},
   ]);
 
-  const [messages, setMessages] = React.useState([
-    {id: 1, content: 'Hello'},
-    {id: 2, content: 'What is yor name?'},
+  const [users, setUsers] = React.useState([
+    {id: 1, name: 'Sofi', messages: [{content: 'Hello'}]},
+    {id: 2, name: 'Sam', messages: []},
+    {id: 3, name: 'Juli', messages: [{content: 'How are you?'}]},
   ]);
 
   return (
@@ -28,7 +29,7 @@ const App = () => {
             <Profile posts={posts} setPosts={setPosts}/>
           </Route>
           <Route path='/messages'>
-            <Messages setMessages={setMessages} messages={messages}/>
+            <Messages setUsers={setUsers} users={users}/>
           </Route>
         </div>
         <div className={style.empty}/>
