@@ -1,3 +1,5 @@
+import {postsReducer, ownerReducer} from './profileReducer';
+
 const StateManager = (function() {
   /**
    * Constructor function.
@@ -32,14 +34,9 @@ const StateManager = (function() {
     },
   });
 
-  StateManager.addPost = function(title) {
-    _state.postsData.push({id: Date.now(), completed: false, title: title});
-    _state.ownerData.inputText = '';
-    callSubscriber();
-  };
-
-  StateManager.updateInput = function(event) {
-    _state.ownerData.inputText = event.target.value;
+  StateManager.dispatch = function(action) {
+    _state.ownerData = ownerReducer(_state.ownerData, action);
+    _state.postsData = postsReducer(_state.postsData, action);
     callSubscriber();
   };
 

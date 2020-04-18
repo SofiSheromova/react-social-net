@@ -4,7 +4,7 @@ import Avatar from './Avatar/Avatar';
 import PostsWall from './PostsWall/PostsWall';
 import PropTypes from 'prop-types';
 
-const Profile = ({posts, addPost, ownerData, updateInput}) => {
+const Profile = ({posts, ownerData, dispatch}) => {
   return (
     <div>
       <div className={style.info}>
@@ -16,18 +16,17 @@ const Profile = ({posts, addPost, ownerData, updateInput}) => {
       </div>
       <PostsWall
         posts={posts}
-        addPost={addPost}
+        dispatch={dispatch}
         inputText={ownerData.inputText}
-        updateInput={updateInput}/>
+      />
     </div>
   );
 };
 
 Profile.propTypes = {
   posts: PropTypes.array.isRequired,
-  addPost: PropTypes.func.isRequired,
   ownerData: PropTypes.object.isRequired,
-  updateInput: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default Profile;

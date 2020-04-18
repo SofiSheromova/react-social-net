@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import StateManager from './stateManager';
+import StateManager from './redux/stateManager';
 
 /**
  * Rerender function.
@@ -12,8 +12,7 @@ function rerenderWholePage() {
   ReactDOM.render(
       <React.StrictMode>
         <App state={StateManager.state}
-          addPost={StateManager.addPost}
-          updateInput={StateManager.updateInput}
+          dispatch={StateManager.dispatch}
         />
       </React.StrictMode>,
       document.getElementById('root'),

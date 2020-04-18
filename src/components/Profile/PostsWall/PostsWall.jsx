@@ -3,8 +3,18 @@ import style from './PostsWall.module.css';
 import Post from './Post/Post.jsx';
 import InputPost from './InputPost/InputPost.jsx';
 import PropTypes from 'prop-types';
+import {addPostActionCreator, updateInputActionCreator}
+  from '../../../redux/profileReducer';
 
-const PostsWall = ({posts, addPost, updateInput, inputText}) => {
+const PostsWall = ({posts, dispatch, inputText}) => {
+  const addPost = function(title) {
+    dispatch(addPostActionCreator(title));
+  };
+
+  const updateInput = function(event) {
+    dispatch(updateInputActionCreator(event));
+  };
+
   return (
     <div className={style.box}>
       <InputPost
@@ -23,8 +33,7 @@ const PostsWall = ({posts, addPost, updateInput, inputText}) => {
 
 PostsWall.propTypes = {
   posts: PropTypes.array.isRequired,
-  addPost: PropTypes.func.isRequired,
-  updateInput: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
   inputText: PropTypes.string.isRequired,
 };
 
