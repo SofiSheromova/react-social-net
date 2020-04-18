@@ -3,15 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import state from './state';
+import StateManager from './stateManager';
 
-ReactDOM.render(
-    <React.StrictMode>
-      <App postsData={state.postsData}
-        usersData={state.messagesData}
-        ownerData={state.ownerData}/>
-    </React.StrictMode>,
-    document.getElementById('root'),
-);
+/**
+ * Rerender function.
+ */
+function rerenderWholePage() {
+  ReactDOM.render(
+      <React.StrictMode>
+        <App state={StateManager.state}
+          addPost={StateManager.addPost}
+        />
+      </React.StrictMode>,
+      document.getElementById('root'),
+  );
+}
+
+StateManager.subscribe(rerenderWholePage);
+rerenderWholePage();
 
 serviceWorker.unregister();

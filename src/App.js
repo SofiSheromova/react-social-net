@@ -8,10 +8,7 @@ import Footer from './components/Footer/Footer';
 import {BrowserRouter, Route} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const App = ({postsData, usersData, ownerData}) => {
-  const [posts, setPosts] = React.useState(postsData);
-  const [users, setUsers] = React.useState(usersData);
-
+const App = ({state, addPost}) => {
   return (
     <div className={style.App}>
       <BrowserRouter>
@@ -19,10 +16,14 @@ const App = ({postsData, usersData, ownerData}) => {
         <Navbar/>
         <div className={style.content}>
           <Route path='/profile'>
-            <Profile posts={posts} setPosts={setPosts} ownerData={ownerData}/>
+            <Profile
+              ownerData={state.ownerData}
+              posts={state.postsData}
+              addPost={addPost}
+            />
           </Route>
           <Route path='/messages'>
-            <Messages setUsers={setUsers} users={users}/>
+            <Messages chats={state.messagesData}/>
           </Route>
         </div>
         <Footer/>
@@ -32,9 +33,8 @@ const App = ({postsData, usersData, ownerData}) => {
 };
 
 App.propTypes = {
-  postsData: PropTypes.array.isRequired,
-  usersData: PropTypes.array.isRequired,
-  ownerData: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
+  addPost: PropTypes.func.isRequired,
 };
 
 export default App;

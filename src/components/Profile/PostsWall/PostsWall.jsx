@@ -4,23 +4,7 @@ import Post from './Post/Post.jsx';
 import InputPost from './InputPost/InputPost.jsx';
 import PropTypes from 'prop-types';
 
-const PostsWall = ({posts, setPosts}) => {
-  /**
-   * Addition post to profile's posts.
-   * @param {string} title The title for new post.
-   */
-  function addPost(title) {
-    setPosts(
-        [
-          {
-            title: title,
-            id: Date.now(),
-            completed: false,
-          },
-        ].concat(posts),
-    );
-  }
-
+const PostsWall = ({posts, addPost}) => {
   return (
     <div className={style.box}>
       <InputPost onCreate={addPost}/>
@@ -35,7 +19,7 @@ const PostsWall = ({posts, setPosts}) => {
 
 PostsWall.propTypes = {
   posts: PropTypes.array.isRequired,
-  setPosts: PropTypes.func.isRequired,
+  addPost: PropTypes.func.isRequired,
 };
 
 export default PostsWall;

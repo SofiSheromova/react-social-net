@@ -4,7 +4,7 @@ import Avatar from './Avatar/Avatar';
 import PostsWall from './PostsWall/PostsWall';
 import PropTypes from 'prop-types';
 
-const Profile = ({posts, setPosts, ownerData}) => {
+const Profile = ({posts, addPost, ownerData}) => {
   return (
     <div>
       <div className={style.info}>
@@ -14,14 +14,14 @@ const Profile = ({posts, setPosts, ownerData}) => {
         </div>
         <Avatar linkImg={ownerData.linkImg}/>
       </div>
-      <PostsWall setPosts={setPosts} posts={posts}/>
+      <PostsWall addPost={addPost} posts={posts}/>
     </div>
   );
 };
 
 Profile.propTypes = {
   posts: PropTypes.array.isRequired,
-  setPosts: PropTypes.func.isRequired,
+  addPost: PropTypes.func.isRequired,
   ownerData: PropTypes.object.isRequired,
 };
 
