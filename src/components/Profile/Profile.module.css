@@ -1,0 +1,17 @@
+.info {
+    display: grid;
+    grid-template-areas: "name avatar" "description avatar";
+    grid-template-columns: 8fr 4fr;
+    grid-template-rows: 20% 80%;
+    min-height: 30vh;
+}
+
+.name {
+    grid-area: name;
+    font-family: "Barbie Display", sans-serif;
+    font-size: 90px;
+}
+
+.description {
+    grid-area: description;
+}
