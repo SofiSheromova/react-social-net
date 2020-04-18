@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import StateManager from './redux/stateManager';
+import store from './redux/store';
 
 /**
  * Rerender function.
@@ -11,15 +11,15 @@ import StateManager from './redux/stateManager';
 function rerenderWholePage() {
   ReactDOM.render(
       <React.StrictMode>
-        <App state={StateManager.state}
-          dispatch={StateManager.dispatch}
+        <App state={store.getState()}
+          dispatch={store.dispatch}
         />
       </React.StrictMode>,
       document.getElementById('root'),
   );
 }
 
-StateManager.subscribe(rerenderWholePage);
+store.subscribe(rerenderWholePage);
 rerenderWholePage();
 
 serviceWorker.unregister();
