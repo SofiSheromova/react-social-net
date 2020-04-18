@@ -1,19 +1,23 @@
-.App {
-    display: grid;
-    height: 100vh;
-    grid-template-areas: "nav header empty" "nav content empty" "footer footer footer";
-    grid-template-rows: 60px 1fr 30px;
-    grid-template-columns: 2fr 8fr 2fr;
+a {
+    text-decoration: none;
 }
 
-.empty {
-    grid-area: empty;
+.App {
+    min-height: 100vh;
     background: #eedcd8;
+    display: flex;
+    flex-direction: column;
 }
 
 .content {
-    grid-area: content;
     background: #ffffff;
-    margin: 10px;
+    padding: 10px;
+    width: 80%;
+    margin: auto;
+    flex-grow: 1;
 }
 
+.header {
+    padding: 10px;
+    background: #8e5678;
+}

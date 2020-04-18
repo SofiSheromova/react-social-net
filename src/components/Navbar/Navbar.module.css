@@ -1,25 +1,25 @@
 .nav {
-    padding: 50px 0;
+    position: sticky;
+    display: flex;
+    justify-content: center;
     text-align: center;
     grid-area: nav;
-    background: #eedcd8;
+    background: #8e5678;
     font-size: 20px;
+    padding: 10px;
 }
 
 .item {
-    margin: 15px;
+    width: 120px;
     padding: 5px;
+    margin: 0 10px;
     border-radius: 15px;
-    border: #8e5678 dashed 1px;
+    color: #ffffff;
 }
 
-a {
+.item:hover {
     text-decoration: none;
-    color: #8e5678;
-}
-
-a:hover {
-    text-decoration:none;
-    color: #8e5678;
-    cursor:pointer;
+    background: #744663;
+    color: #ffffff;
+    cursor: pointer;
 }

@@ -5,3 +5,13 @@
     grid-template-rows: 20% 80%;
     min-height: 30vh;
 }
+
+.name {
+    grid-area: name;
+    font-family: "Barbie Display", sans-serif;
+    font-size: 90px;
+}
+
+.description {
+    grid-area: description;
+}

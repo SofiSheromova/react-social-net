@@ -1,15 +1,20 @@
 import React from 'react';
 import style from './Avatar.module.css';
+import PropTypes from 'prop-types';
 
-const Avatar = () => {
+const Avatar = ({linkImg}) => {
   return (
     <div className={style.avatar}>
       <img
-        src='https://i.pinimg.com/originals/f0/80/ec/f080ec2f072c4e81e9170dcb76731c85.jpg'
+        src={linkImg}
         alt='avatar'
       />
     </div>
   );
+};
+
+Avatar.propTypes = {
+  linkImg: PropTypes.string,
 };
 
 export default Avatar;

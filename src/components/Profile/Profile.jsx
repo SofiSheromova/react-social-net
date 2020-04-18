@@ -1,18 +1,18 @@
 import React from 'react';
 import style from './Profile.module.css';
 import Avatar from './Avatar/Avatar';
-import Description from './Description/Description';
-import Name from './Name/Name';
 import SecretBox from './SecretsBox/SecretBox';
 import PropTypes from 'prop-types';
 
-const Profile = ({posts, setPosts}) => {
+const Profile = ({posts, setPosts, ownerData}) => {
   return (
     <div>
       <div className={style.info}>
-        <Name/>
-        <Avatar/>
-        <Description/>
+        <div>
+          <div className={style.name}>{ownerData.name}</div>
+          <div className={style.description}>{ownerData.description}</div>
+        </div>
+        <Avatar linkImg={ownerData.linkImg}/>
       </div>
       <SecretBox setPosts={setPosts} posts={posts}/>
     </div>
@@ -22,6 +22,7 @@ const Profile = ({posts, setPosts}) => {
 Profile.propTypes = {
   posts: PropTypes.array.isRequired,
   setPosts: PropTypes.func.isRequired,
+  ownerData: PropTypes.object.isRequired,
 };
 
 export default Profile;

@@ -5,21 +5,11 @@ import {NavLink} from 'react-router-dom';
 const Navbar = () => {
   return (
     <nav className={style.nav}>
-      <div className={style.item}>
-        <NavLink to='/profile'>Profile</NavLink>
-      </div>
-      <div className={style.item}>
-        <NavLink to='/messages'>Messages</NavLink>
-      </div>
-      <div className={style.item}>
-        <NavLink to='/news'>News</NavLink>
-      </div>
-      <div className={style.item}>
-        <NavLink to='/music'>Music</NavLink>
-      </div>
-      <div className={style.item}>
-        <NavLink to='/settings'>Settings</NavLink>
-      </div>
+      <NavLink className={style.item} to='/profile'>Profile</NavLink>
+      <NavLink className={style.item} to='/messages'>Messages</NavLink>
+      <NavLink className={style.item} to='/news'>News</NavLink>
+      <NavLink className={style.item} to='/music'>Music</NavLink>
+      <NavLink className={style.item} to='/settings'>Settings</NavLink>
     </nav>
   );
 };
