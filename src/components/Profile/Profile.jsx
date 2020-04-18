@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Profile.module.css';
 import Avatar from './Avatar/Avatar';
-import PostsWall from './PostsWall/PostsWall';
+import PostsWallContainer from './PostsWall/PostsWallContainer';
 import PropTypes from 'prop-types';
 
 const Profile = ({posts, ownerData, dispatch}) => {
@@ -14,7 +14,7 @@ const Profile = ({posts, ownerData, dispatch}) => {
         </div>
         <Avatar linkImg={ownerData.linkImg}/>
       </div>
-      <PostsWall
+      <PostsWallContainer
         posts={posts}
         dispatch={dispatch}
         inputText={ownerData.inputText}

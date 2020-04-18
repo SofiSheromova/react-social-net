@@ -23,7 +23,7 @@ const App = ({state, dispatch}) => {
             />
           </Route>
           <Route path='/messages'>
-            <Messages chats={state.messagesData}/>
+            <Messages chats={state.messagesData} dispatch={dispatch}/>
           </Route>
         </div>
         <Footer/>

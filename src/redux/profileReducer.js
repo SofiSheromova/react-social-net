@@ -1,4 +1,6 @@
-const ProfileChangesTypes = Object.freeze({ADD_POST: 1, UPDATE_INPUT: 2});
+const ProfileChangesTypes = Object.freeze(
+    {ADD_POST: 'ADD_POST', UPDATE_INPUT: 'UPDATE_INPUT'},
+);
 
 export const addPostActionCreator = function(title) {
   return {
