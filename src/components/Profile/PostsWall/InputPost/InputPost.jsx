@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import style from './InputSecret.module.css';
+import style from './InputPost.module.css';
 import PropTypes from 'prop-types';
 
 /**
@@ -20,7 +20,7 @@ function useInputValue(defaultValue = '') {
   };
 }
 
-const InputSecret = ({onCreate}) => {
+const InputPost = ({onCreate}) => {
   const input = useInputValue();
 
   /**
@@ -43,8 +43,8 @@ const InputSecret = ({onCreate}) => {
   );
 };
 
-InputSecret.propTypes = {
+InputPost.propTypes = {
   onCreate: PropTypes.func.isRequired,
 };
 
-export default InputSecret;
+export default InputPost;

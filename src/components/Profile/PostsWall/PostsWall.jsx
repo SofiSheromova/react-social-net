@@ -1,10 +1,10 @@
 import React from 'react';
-import style from './SecretBox.module.css';
-import Secret from './Secret/Secret.jsx';
-import InputSecret from './InputSecret/InputSecret.jsx';
+import style from './PostsWall.module.css';
+import Post from './Post/Post.jsx';
+import InputPost from './InputPost/InputPost.jsx';
 import PropTypes from 'prop-types';
 
-const SecretBox = ({posts, setPosts}) => {
+const PostsWall = ({posts, setPosts}) => {
   /**
    * Addition post to profile's posts.
    * @param {string} title The title for new post.
@@ -23,19 +23,19 @@ const SecretBox = ({posts, setPosts}) => {
 
   return (
     <div className={style.box}>
-      <InputSecret onCreate={addPost}/>
+      <InputPost onCreate={addPost}/>
       {
         posts.map((post) => {
-          return <Secret key={post.id} content={post.title}/>;
+          return <Post key={post.id} content={post.title}/>;
         })
       }
     </div>
   );
 };
 
-SecretBox.propTypes = {
+PostsWall.propTypes = {
   posts: PropTypes.array.isRequired,
   setPosts: PropTypes.func.isRequired,
 };
 
-export default SecretBox;
+export default PostsWall;

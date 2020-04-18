@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Profile.module.css';
 import Avatar from './Avatar/Avatar';
-import SecretBox from './SecretsBox/SecretBox';
+import PostsWall from './PostsWall/PostsWall';
 import PropTypes from 'prop-types';
 
 const Profile = ({posts, setPosts, ownerData}) => {
@@ -14,7 +14,7 @@ const Profile = ({posts, setPosts, ownerData}) => {
         </div>
         <Avatar linkImg={ownerData.linkImg}/>
       </div>
-      <SecretBox setPosts={setPosts} posts={posts}/>
+      <PostsWall setPosts={setPosts} posts={posts}/>
     </div>
   );
 };
