@@ -8,7 +8,7 @@ import Footer from './components/Footer/Footer';
 import {BrowserRouter, Route} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const App = ({state, addPost}) => {
+const App = ({state, addPost, updateInput}) => {
   return (
     <div className={style.App}>
       <BrowserRouter>
@@ -20,6 +20,7 @@ const App = ({state, addPost}) => {
               ownerData={state.ownerData}
               posts={state.postsData}
               addPost={addPost}
+              updateInput={updateInput}
             />
           </Route>
           <Route path='/messages'>
@@ -35,6 +36,7 @@ const App = ({state, addPost}) => {
 App.propTypes = {
   state: PropTypes.object.isRequired,
   addPost: PropTypes.func.isRequired,
+  updateInput: PropTypes.func.isRequired,
 };
 
 export default App;

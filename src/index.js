@@ -13,6 +13,7 @@ function rerenderWholePage() {
       <React.StrictMode>
         <App state={StateManager.state}
           addPost={StateManager.addPost}
+          updateInput={StateManager.updateInput}
         />
       </React.StrictMode>,
       document.getElementById('root'),

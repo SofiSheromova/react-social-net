@@ -11,6 +11,7 @@ const StateManager = (function() {
       description: 'Look what a beautiful page!!!!!!!!!!',
       linkImg: 'https://i.pinimg.com/originals/f0/80/ec/f080ec2f072c4e81e9170dcb76731c85.jpg',
       friends: {},
+      inputText: '',
     },
     postsData: [
       {id: 1, completed: false, title: 'How are you?'},
@@ -33,7 +34,12 @@ const StateManager = (function() {
 
   StateManager.addPost = function(title) {
     _state.postsData.push({id: Date.now(), completed: false, title: title});
-    window.state = _state;
+    _state.ownerData.inputText = '';
+    callSubscriber();
+  };
+
+  StateManager.updateInput = function(event) {
+    _state.ownerData.inputText = event.target.value;
     callSubscriber();
   };
 

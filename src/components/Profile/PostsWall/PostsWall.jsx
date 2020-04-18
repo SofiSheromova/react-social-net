@@ -4,10 +4,14 @@ import Post from './Post/Post.jsx';
 import InputPost from './InputPost/InputPost.jsx';
 import PropTypes from 'prop-types';
 
-const PostsWall = ({posts, addPost}) => {
+const PostsWall = ({posts, addPost, updateInput, inputText}) => {
   return (
     <div className={style.box}>
-      <InputPost onCreate={addPost}/>
+      <InputPost
+        inputText={inputText}
+        onUpdateInput={updateInput}
+        onCreate={addPost}
+      />
       {
         posts.map((post) => {
           return <Post key={post.id} content={post.title}/>;
@@ -20,6 +24,8 @@ const PostsWall = ({posts, addPost}) => {
 PostsWall.propTypes = {
   posts: PropTypes.array.isRequired,
   addPost: PropTypes.func.isRequired,
+  updateInput: PropTypes.func.isRequired,
+  inputText: PropTypes.string.isRequired,
 };
 
 export default PostsWall;

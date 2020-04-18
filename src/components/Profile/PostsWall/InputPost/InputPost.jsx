@@ -1,49 +1,30 @@
-import React, {useState} from 'react';
+import React from 'react';
 import style from './InputPost.module.css';
 import PropTypes from 'prop-types';
 
-/**
- * Extension react hook
- * @param {string} defaultValue The first number.
- * @return {object}
- */
-function useInputValue(defaultValue = '') {
-  const [value, setValue] = useState(defaultValue);
-
-  return {
-    bind: {
-      value: value,
-      onChange: (event) => setValue(event.target.value),
-    },
-    clear: () => setValue(''),
-    value: () => value,
-  };
-}
-
-const InputPost = ({onCreate}) => {
-  const input = useInputValue();
-
+const InputPost = ({inputText, onUpdateInput, onCreate}) => {
   /**
    * Submit handler for form
    * @param {Event} event The first number.
    */
   function submitHandler(event) {
     event.preventDefault();
-    if (input.value().trim()) {
-      onCreate(input.value());
-      input.clear();
+    if (inputText.trim()) {
+      onCreate(inputText);
     }
   }
 
   return (
     <form className={style.wrapper} onSubmit={submitHandler}>
-      <input {...input.bind}/>
+      <input value={inputText} onChange={onUpdateInput}/>
       <button type="submit">add secret</button>
     </form>
   );
 };
 
 InputPost.propTypes = {
+  inputText: PropTypes.string,
+  onUpdateInput: PropTypes.func,
   onCreate: PropTypes.func.isRequired,
 };
 
