@@ -7,6 +7,7 @@ import Messages from './components/Messages/Messages';
 import Footer from './components/Footer/Footer';
 import {Route} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import PeopleContainer from './components/People/PeopleContainer';
 
 const App = ({ownerData, messagesData}) => {
   return (
@@ -19,6 +20,9 @@ const App = ({ownerData, messagesData}) => {
         </Route>
         <Route path='/messages'>
           <Messages chats={messagesData}/>
+        </Route>
+        <Route path='/people'>
+          <PeopleContainer />
         </Route>
       </div>
       <Footer/>

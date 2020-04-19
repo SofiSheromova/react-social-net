@@ -1,0 +1,13 @@
+.people {
+    display: flex;
+    flex-direction: column;
+}
+
+.line {
+    display: flex;
+    margin: 10px;
+}
+
+.line button {
+    width: 15%;
+}

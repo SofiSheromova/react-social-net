@@ -2,22 +2,19 @@ const MessagesChangesTypes = Object.freeze(
     {ADD_MESSAGE: 'ADD_MESSAGE', UPDATE_MESSAGE_INPUT: 'UPDATE_MESSAGE_INPUT'},
 );
 
-export const addMessageActionCreator = function(content, chatId) {
-  return {
-    type: MessagesChangesTypes.ADD_MESSAGE,
-    content: content,
-    id: chatId,
-    itsOwn: true,
-  };
-};
+export const addMessageActionCreator = (content, chatId) => ({
+  type: MessagesChangesTypes.ADD_MESSAGE,
+  content: content,
+  id: chatId,
+  itsOwn: true,
+});
 
-export const updateMessageInputActionCreator = function(event, chatId) {
-  return {
-    type: MessagesChangesTypes.UPDATE_MESSAGE_INPUT,
-    event: event,
-    id: chatId,
-  };
-};
+
+export const updateMessageInputActionCreator = (event, chatId) => ({
+  type: MessagesChangesTypes.UPDATE_MESSAGE_INPUT,
+  event: event,
+  id: chatId,
+});
 
 const initialMessagesState = [
   {id: 1001, name: 'Sofi', inputMessage: '',

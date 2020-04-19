@@ -9,7 +9,7 @@ const Navbar = () => {
       <NavLink className={style.item} to='/messages'>Messages</NavLink>
       <NavLink className={style.item} to='/news'>News</NavLink>
       <NavLink className={style.item} to='/music'>Music</NavLink>
-      <NavLink className={style.item} to='/settings'>Settings</NavLink>
+      <NavLink className={style.item} to='/people'>People</NavLink>
     </nav>
   );
 };

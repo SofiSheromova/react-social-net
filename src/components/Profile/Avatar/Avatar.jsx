@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const Avatar = ({linkImg}) => {
   return (
     <div className={style.avatar}>
-      <img
+      <img className={style.avatarImg}
         src={linkImg}
         alt='avatar'
       />

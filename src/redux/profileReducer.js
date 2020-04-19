@@ -2,19 +2,15 @@ const ProfileChangesTypes = Object.freeze(
     {ADD_POST: 'ADD_POST', UPDATE_INPUT: 'UPDATE_INPUT'},
 );
 
-export const addPostActionCreator = function(title) {
-  return {
-    type: ProfileChangesTypes.ADD_POST,
-    title: title,
-  };
-};
+export const addPostActionCreator = (title) => ({
+  type: ProfileChangesTypes.ADD_POST,
+  title: title,
+});
 
-export const updateInputActionCreator = function(event) {
-  return {
-    type: ProfileChangesTypes.UPDATE_INPUT,
-    event: event,
-  };
-};
+export const updateInputActionCreator = (event) => ({
+  type: ProfileChangesTypes.UPDATE_INPUT,
+  event: event,
+});
 
 const initialPostsState = [
   {id: 1, completed: false, title: 'How are you?'},

@@ -1,0 +1,12 @@
+.person {
+    display: flex;
+    justify-content: space-between;
+    background: #f3eef0;
+    position: relative;
+    width: 80%;
+}
+
+.person img {
+    display: block;
+    width: 100px;
+}
