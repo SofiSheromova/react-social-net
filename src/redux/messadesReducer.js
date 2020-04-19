@@ -30,23 +30,20 @@ const initialMessagesState = [
 
 export const messagesReducer = function(state = initialMessagesState, action) {
   let stateCopy;
-  switch (action.type) {
-    case MessagesChangesTypes.ADD_MESSAGE: {
-      stateCopy = state.slice();
-      const partner = stateCopy.find((chat) => chat.id === action.id);
-      partner.messages.push(
-          {id: Date.now(), content: action.content, itsOwn: action.istOwn},
-      );
-      partner.inputMessage = '';
-      return stateCopy;
-    }
-    case MessagesChangesTypes.UPDATE_MESSAGE_INPUT: {
-      stateCopy = state.slice();
-      const partner = stateCopy.find((chat) => chat.id === action.id);
-      partner.inputMessage = action.event.target.value;
-      return stateCopy;
-    }
+  if (action.type === MessagesChangesTypes.ADD_MESSAGE) {
+    stateCopy = state.slice();
+    const partner = stateCopy.find((chat) => chat.id === action.id);
+    partner.messages.push(
+        {id: Date.now(), content: action.content, itsOwn: action.istOwn},
+    );
+    partner.inputMessage = '';
+    return stateCopy;
+  }
+  if (action.type === MessagesChangesTypes.UPDATE_MESSAGE_INPUT) {
+    stateCopy = state.slice();
+    const partner = stateCopy.find((chat) => chat.id === action.id);
+    partner.inputMessage = action.event.target.value;
+    return stateCopy;
   }
   return state;
 };
-

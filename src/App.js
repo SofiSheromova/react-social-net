@@ -28,7 +28,7 @@ const App = ({ownerData, messagesData}) => {
 
 App.propTypes = {
   ownerData: PropTypes.object.isRequired,
-  messagesData: PropTypes.object.isRequired,
+  messagesData: PropTypes.array.isRequired,
 };
 
 export default App;
