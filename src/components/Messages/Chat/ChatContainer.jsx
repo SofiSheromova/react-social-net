@@ -1,30 +1,25 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import Chat from './Chat';
 import {addMessageActionCreator, updateMessageInputActionCreator}
   from '../../../redux/messadesReducer';
+import {connect} from 'react-redux';
 
-const ChatContainer = ({user, dispatch}) => {
-  const addMessage = function(title) {
-    dispatch(addMessageActionCreator(title, user.id));
-  };
+const mapStateToProps = (state, ownProps) => ({
+  user: ownProps.user,
+  inputMessage: ownProps.user.inputMessage,
+});
 
-  const updateInput = function(event) {
-    dispatch(updateMessageInputActionCreator(event, user.id));
-  };
-  return (
-    <Chat
-      user={user}
-      inputMessage={user.inputMessage}
-      updateInput={updateInput}
-      addMessage={addMessage}
-    />
-  );
-};
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  updateInput: (event) =>
+    dispatch(updateMessageInputActionCreator(event, ownProps.user.id)),
+  addMessage: (title) =>
+    dispatch(addMessageActionCreator(title, ownProps.user.id)),
+});
+
+const ChatContainer = connect(mapStateToProps, mapDispatchToProps)(Chat);
 
 ChatContainer.propTypes = {
   user: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
 };
 
 export default ChatContainer;

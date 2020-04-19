@@ -5,36 +5,30 @@ import Navbar from './components/Navbar/Navbar.jsx';
 import Profile from './components/Profile/Profile';
 import Messages from './components/Messages/Messages';
 import Footer from './components/Footer/Footer';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const App = ({state, dispatch}) => {
+const App = ({ownerData, messagesData}) => {
   return (
     <div className={style.App}>
-      <BrowserRouter>
-        <div className={style.header}><Header/></div>
-        <Navbar/>
-        <div className={style.content}>
-          <Route path='/profile'>
-            <Profile
-              ownerData={state.ownerData}
-              posts={state.postsData}
-              dispatch={dispatch}
-            />
-          </Route>
-          <Route path='/messages'>
-            <Messages chats={state.messagesData} dispatch={dispatch}/>
-          </Route>
-        </div>
-        <Footer/>
-      </BrowserRouter>
+      <div className={style.header}><Header/></div>
+      <Navbar/>
+      <div className={style.content}>
+        <Route path='/profile'>
+          <Profile ownerData={ownerData}/>
+        </Route>
+        <Route path='/messages'>
+          <Messages chats={messagesData}/>
+        </Route>
+      </div>
+      <Footer/>
     </div>
   );
 };
 
 App.propTypes = {
-  state: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
+  ownerData: PropTypes.object.isRequired,
+  messagesData: PropTypes.object.isRequired,
 };
 
 export default App;

@@ -5,7 +5,7 @@ import ChatList from './ChatList/ChatList';
 import {Route} from 'react-router-dom';
 import ChatContainer from './Chat/ChatContainer';
 
-const Messages = ({chats, dispatch}) => {
+const Messages = ({chats}) => {
   return (
     <div className={style.profile}>
       <span>Your messages are here</span>
@@ -15,7 +15,7 @@ const Messages = ({chats, dispatch}) => {
       {
         chats.map((chat) => {
           return <Route key={chat.id} path={`/messages/${chat.id}`} >
-            <ChatContainer user={chat} dispatch={dispatch}/>
+            <ChatContainer user = {chat}/>
           </Route>;
         })
       }
@@ -25,7 +25,6 @@ const Messages = ({chats, dispatch}) => {
 
 Messages.propTypes = {
   chats: PropTypes.array.isRequired,
-  dispatch: PropTypes.func.isRequired,
 };
 
 export default Messages;

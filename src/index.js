@@ -4,22 +4,23 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './redux/store';
+import {Provider} from 'react-redux';
+import {BrowserRouter} from 'react-router-dom';
 
-/**
- * Rerender function.
- */
-function rerenderWholePage() {
-  ReactDOM.render(
-      <React.StrictMode>
-        <App state={store.getState()}
-          dispatch={store.dispatch}
-        />
-      </React.StrictMode>,
-      document.getElementById('root'),
-  );
-}
 
-store.subscribe(rerenderWholePage);
-rerenderWholePage();
+ReactDOM.render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <Provider store={store}>
+          <App
+            ownerData={store.getState().ownerData}
+            messagesData={store.getState().messagesData}
+          />
+        </Provider>
+      </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById('root'),
+);
+
 
 serviceWorker.unregister();

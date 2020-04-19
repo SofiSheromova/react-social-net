@@ -22,12 +22,12 @@ const initialPostsState = [
 ];
 
 export const postsReducer = function(state = initialPostsState, action) {
-  switch (action.type) {
-    case ProfileChangesTypes.ADD_POST: {
-      state.push(
-          {id: Date.now(), completed: false, title: action.title},
-      );
-    }
+  if (action.type === ProfileChangesTypes.ADD_POST) {
+    const stateCopy = state.slice();
+    stateCopy.push(
+        {id: Date.now(), completed: false, title: action.title},
+    );
+    return stateCopy;
   }
   return state;
 };
@@ -42,14 +42,16 @@ const initialOwnerState = {
 };
 
 export const ownerReducer = function(state = initialOwnerState, action) {
-  switch (action.type) {
-    case ProfileChangesTypes.ADD_POST: {
-      state.inputText = '';
-      break;
-    }
-    case ProfileChangesTypes.UPDATE_INPUT: {
-      state.inputText = action.event.target.value;
-    }
+  let stateCopy;
+  if (action.type === ProfileChangesTypes.ADD_POST) {
+    stateCopy = Object.assign({}, state);
+    stateCopy.inputText = '';
+    return stateCopy;
+  }
+  if (action.type === ProfileChangesTypes.UPDATE_INPUT) {
+    stateCopy = Object.assign({}, state);
+    stateCopy.inputText = action.event.target.value;
+    return stateCopy;
   }
   return state;
 };

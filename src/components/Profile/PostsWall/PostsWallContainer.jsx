@@ -1,32 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import {addPostActionCreator, updateInputActionCreator}
   from '../../../redux/profileReducer';
 import PostsWall from './PostsWall';
+import {connect} from 'react-redux';
 
-const PostsWallContainer = ({posts, dispatch, inputText}) => {
-  const addPost = function(title) {
-    dispatch(addPostActionCreator(title));
-  };
+const mapStateToProps = (state) => ({
+  posts: state.postsData,
+  inputText: state.ownerData.inputText,
+});
 
-  const updateInput = function(event) {
-    dispatch(updateInputActionCreator(event));
-  };
+const mapDispatchToProps = (dispatch) => ({
+  addPost: (title) =>
+    dispatch(addPostActionCreator(title)),
+  updateInput: (event) =>
+    dispatch(updateInputActionCreator(event)),
+});
 
-  return (
-    <PostsWall
-      posts={posts}
-      addPost={addPost}
-      inputText={inputText}
-      updateInput={updateInput}
-    />
-  );
-};
-
-PostsWallContainer.propTypes = {
-  posts: PropTypes.array.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  inputText: PropTypes.string.isRequired,
-};
+const PostsWallContainer =
+    connect(mapStateToProps, mapDispatchToProps)(PostsWall);
 
 export default PostsWallContainer;
