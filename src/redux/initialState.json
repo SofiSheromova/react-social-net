@@ -1,0 +1,74 @@
+{
+  "owner": {
+    "id": 0,
+    "name": "Eva Smith",
+    "description": "Look what a beautiful page!!!!!!!!!!",
+    "linkImg": "https://i.pinimg.com/originals/f0/80/ec/f080ec2f072c4e81e9170dcb76731c85.jpg",
+    "friends": {},
+    "inputText": ""
+  },
+  "posts": [
+    {
+      "id": 1,
+      "completed": false,
+      "title": "How are you?"
+    },
+    {
+      "id": 2,
+      "completed": false,
+      "title": "Hello, it is my first post!"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1001,
+      "name": "Sofi",
+      "inputMessage": "",
+      "messages": [
+        {
+          "id": 2001,
+          "content": "Hello",
+          "itsOwn": true
+        }
+      ]
+    },
+    {
+      "id": 1002,
+      "name": "Sam",
+      "inputMessage": "",
+      "messages": []
+    },
+    {
+      "id": 1003,
+      "name": "Juli",
+      "inputMessage": "",
+      "messages": [
+        {
+          "id": 2002,
+          "content": "How are you?",
+          "itsOwn": false
+        }
+      ]
+    }
+  ],
+  "people": [
+    {
+      "id": 1001,
+      "name": "Sofi",
+      "isFriend": true,
+      "avatar": "https://mytoys.scene7.com/is/image/myToys/ext/8422443-01.jpg?$l$"
+    },
+    {
+      "id": 1002,
+      "name": "Sammi",
+      "isFriend": false,
+      "avatar": "https://mytoys.scene7.com/is/image/myToys/ext/8422443-01.jpg?$l$"
+    },
+    {
+      "id": 1003,
+      "name": "Julia",
+      "isFriend": true,
+      "avatar": "https://mytoys.scene7.com/is/image/myToys/ext/8422443-01.jpg?$l$"
+    }
+  ]
+}

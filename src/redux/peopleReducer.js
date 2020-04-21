@@ -1,3 +1,5 @@
+import initialState from './initialState.json';
+
 const PeopleChangesTypes = Object.freeze(
     {FOLLOW_USER: 'FOLLOW_USER', UNFOLLOW_USER: 'UNFOLLOW_USER'},
 );
@@ -12,17 +14,7 @@ export const unfollowActionCreator = (userId) => ({
   userId: userId,
 });
 
-
-const initialPeopleState = [
-  {id: 1001, name: 'Sofi', isFriend: true,
-    avatar: 'https://mytoys.scene7.com/is/image/myToys/ext/8422443-01.jpg?$l$'},
-  {id: 1002, name: 'Sam', isFriend: false,
-    avatar: 'https://mytoys.scene7.com/is/image/myToys/ext/8422443-01.jpg?$l$'},
-  {id: 1003, name: 'Juli', isFriend: true,
-    avatar: 'https://mytoys.scene7.com/is/image/myToys/ext/8422443-01.jpg?$l$'},
-];
-
-export const peopleReducer = function(state = initialPeopleState, action) {
+export const peopleReducer = function(state = initialState.people, action) {
   if (action.type === PeopleChangesTypes.FOLLOW_USER) {
     return state.map(
         (user) =>
