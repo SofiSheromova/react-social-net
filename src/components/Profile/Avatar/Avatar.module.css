@@ -1,7 +1,7 @@
 .avatar {
+    grid-area: avatar;
     position: relative;
     margin: 15px;
-    grid-area: avatar;
 }
 
 .avatar::after {

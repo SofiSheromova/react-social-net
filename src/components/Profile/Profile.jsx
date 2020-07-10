@@ -8,9 +8,9 @@ const Profile = ({ownerData}) => {
   return (
     <div>
       <div className={style.info}>
-        <div>
+        <div className={style.presentation}>
           <div className={style.name}>{ownerData.name}</div>
-          <div className={style.description}>{ownerData.description}</div>
+          <p className={style.description}>{ownerData.description}</p>
         </div>
         <Avatar linkImg={ownerData.linkImg}/>
       </div>

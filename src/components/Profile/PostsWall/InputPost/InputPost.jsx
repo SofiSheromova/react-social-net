@@ -16,8 +16,13 @@ const InputPost = ({inputText, onUpdateInput, onCreate}) => {
 
   return (
     <form className={style.wrapper} onSubmit={submitHandler}>
-      <input value={inputText} onChange={onUpdateInput}/>
-      <button type="submit">add secret</button>
+      <input
+        className={style.input}
+        value={inputText}
+        onChange={onUpdateInput}
+      />
+      <button className={style.button}
+        type="submit">add secret</button>
     </form>
   );
 };

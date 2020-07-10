@@ -2,7 +2,8 @@
     margin: 10px;
     padding: 10px;
     font-size: 50px;
-    font-family: "Barbie Display", serif;
+    font-family: 'Barbie Display', 'Raleway', 'Montserrat', 'Roboto', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 .chat {
 
