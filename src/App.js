@@ -12,8 +12,12 @@ import PeopleContainer from './components/People/PeopleContainer';
 const App = ({ownerData, messagesData}) => {
   return (
     <div className={style.App}>
-      <div className={style.header}><Header/></div>
-      <Navbar/>
+      <div className={style.header}>
+        <Header/>
+      </div>
+      <div className={style.navbar}>
+        <Navbar/>
+      </div>
       <div className={style.content}>
         <Route path='/profile'>
           <Profile ownerData={ownerData}/>

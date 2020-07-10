@@ -1,5 +1,7 @@
 .footer {
-    grid-area: footer;
     background: #eedcd8;
+    padding: 10px;
+    color: #744663;
     text-align: center;
+    letter-spacing: 3px;
 }
