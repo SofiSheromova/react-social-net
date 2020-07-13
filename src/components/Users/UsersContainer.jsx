@@ -1,10 +1,10 @@
 import {followActionCreator, unfollowActionCreator}
-  from '../../redux/peopleReducer';
+  from '../../redux/usersReducer';
 import {connect} from 'react-redux';
-import People from './People';
+import Users from './Users';
 
 const mapStateToProps = (state) => ({
-  users: state.peopleData,
+  users: state.usersData,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -17,6 +17,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-const PeopleContainer = connect(mapStateToProps, mapDispatchToProps)(People);
+const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
 
-export default PeopleContainer;
+export default UsersContainer;

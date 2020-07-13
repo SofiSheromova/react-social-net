@@ -1,13 +1,13 @@
 import {combineReducers, createStore} from 'redux';
 import {ownerReducer, postsReducer} from './profileReducer';
-import {messagesReducer} from './messadesReducer';
-import {peopleReducer} from './peopleReducer';
+import {mailReducer} from './mailReducer';
+import {usersReducer} from './usersReducer';
 
 const reducers = combineReducers({
   ownerData: ownerReducer,
   postsData: postsReducer,
-  messagesData: messagesReducer,
-  peopleData: peopleReducer,
+  mailData: mailReducer,
+  usersData: usersReducer,
 });
 
 const store = createStore(reducers);

@@ -19,7 +19,7 @@
       "title": "Hello, it is my first post!"
     }
   ],
-  "messages": [
+  "mail": [
     {
       "id": 1001,
       "name": "Sofi",
@@ -51,7 +51,7 @@
       ]
     }
   ],
-  "people": [
+  "users": [
     {
       "id": 1001,
       "name": "Sofi",

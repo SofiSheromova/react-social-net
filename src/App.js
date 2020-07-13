@@ -3,13 +3,13 @@ import style from './App.module.css';
 import Header from './components/Header/Header.jsx';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Profile from './components/Profile/Profile';
-import Messages from './components/Messages/Messages';
+import Mail from './components/Mail/Mail';
 import Footer from './components/Footer/Footer';
 import {Route} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import PeopleContainer from './components/People/PeopleContainer';
+import UsersContainer from './components/Users/UsersContainer';
 
-const App = ({ownerData, messagesData}) => {
+const App = ({ownerData, mailData}) => {
   return (
     <div className={style.App}>
       <div className={style.header}>
@@ -23,10 +23,10 @@ const App = ({ownerData, messagesData}) => {
           <Profile ownerData={ownerData}/>
         </Route>
         <Route path='/messages'>
-          <Messages chats={messagesData}/>
+          <Mail dialogs={mailData}/>
         </Route>
         <Route path='/people'>
-          <PeopleContainer />
+          <UsersContainer />
         </Route>
       </div>
       <Footer/>
@@ -36,7 +36,7 @@ const App = ({ownerData, messagesData}) => {
 
 App.propTypes = {
   ownerData: PropTypes.object.isRequired,
-  messagesData: PropTypes.array.isRequired,
+  mailData: PropTypes.array.isRequired,
 };
 
 export default App;

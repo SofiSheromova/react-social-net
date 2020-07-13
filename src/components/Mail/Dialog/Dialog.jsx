@@ -1,12 +1,12 @@
 import React from 'react';
-import style from './Chat.module.css';
+import style from './Dialog.module.css';
 import PropTypes from 'prop-types';
 import Message from './Message/Message';
 
-const Chat = ({user, inputMessage, addMessage, updateInput}) => {
+const Dialog = ({dialog, inputMessage, addMessage, updateInput}) => {
   /**
      * Submit handler for form
-     * @param {Event} event The first number.
+     * @param {Event} event Submit event.
      */
   function submitHandler(event) {
     event.preventDefault();
@@ -16,10 +16,10 @@ const Chat = ({user, inputMessage, addMessage, updateInput}) => {
   }
 
   return (
-    <div className={style.chat}>
-      <div className={style.name}>{user.name}</div>
+    <div className={style.dialog}>
+      <div className={style.name}>{dialog.name}</div>
       {
-        user.messages.map((message) => {
+        dialog.messages.map((message) => {
           return <Message key={message.id} content={message.content}/>;
         })
       }
@@ -31,11 +31,11 @@ const Chat = ({user, inputMessage, addMessage, updateInput}) => {
   );
 };
 
-Chat.propTypes = {
-  user: PropTypes.object.isRequired,
+Dialog.propTypes = {
+  dialog: PropTypes.object.isRequired,
   inputMessage: PropTypes.string.isRequired,
   addMessage: PropTypes.func.isRequired,
   updateInput: PropTypes.func.isRequired,
 };
 
-export default Chat;
+export default Dialog;

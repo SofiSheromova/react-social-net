@@ -13,7 +13,7 @@ ReactDOM.render(
         <Provider store={store}>
           <App
             ownerData={store.getState().ownerData}
-            messagesData={store.getState().messagesData}
+            mailData={store.getState().mailData}
           />
         </Provider>
       </BrowserRouter>

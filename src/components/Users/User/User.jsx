@@ -1,8 +1,8 @@
 import React from 'react';
-import style from './Person.module.css';
+import style from './User.module.css';
 import PropTypes from 'prop-types';
 
-const Person = ({user}) => {
+const User = ({user}) => {
   return (
     <div className={style.person}>
       <div>{user.name}</div>
@@ -11,8 +11,8 @@ const Person = ({user}) => {
   );
 };
 
-Person.propTypes = {
+User.propTypes = {
   user: PropTypes.object.isRequired,
 };
 
-export default Person;
+export default User;

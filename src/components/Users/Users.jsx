@@ -1,15 +1,15 @@
 import React from 'react';
-import style from './People.module.css';
+import style from './Users.module.css';
 import PropTypes from 'prop-types';
-import Person from './Person/Person';
+import User from './User/User';
 
-const People = ({users, changeFollowStatus}) => {
+const Users = ({users, changeFollowStatus}) => {
   return (
-    <div className={style.people}>
+    <div className={style.user}>
       {
         users.map((user) => (
           <div key={user.id} className={style.line}>
-            <Person user={user}/>
+            <User user={user}/>
             <button
               type="button"
               onClick={() => changeFollowStatus(user)}>
@@ -22,9 +22,9 @@ const People = ({users, changeFollowStatus}) => {
   );
 };
 
-People.propTypes = {
+Users.propTypes = {
   users: PropTypes.array.isRequired,
   changeFollowStatus: PropTypes.func.isRequired,
 };
 
-export default People;
+export default Users;
