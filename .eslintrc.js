@@ -23,4 +23,11 @@ module.exports = {
   ],
   'rules': {
   },
+  'settings': {
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "version": "detect",
+    },
+  }
 };
