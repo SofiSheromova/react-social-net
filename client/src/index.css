@@ -2,9 +2,9 @@
 
 @font-face {
     font-family: 'Barbie Display';
-    src: url('./fonts/barbie.ttf');
+    src: url('fonts/barbie.ttf');
     src: local('Barbir Display Regular'), local('BarbieDisplay-Regular'),
-    url('./fonts/barbie.ttf') format('truetype');
+    url('fonts/barbie.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
