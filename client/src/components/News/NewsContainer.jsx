@@ -1,19 +1,14 @@
-import {followActionCreator, unfollowActionCreator}
-  from '../../redux/usersReducer';
+import {setActionCreator} from '../../redux/newsReducer';
 import {connect} from 'react-redux';
 import News from './News';
 
 const mapStateToProps = (state) => ({
-  users: state.usersData,
+  news: state.newsData,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeFollowStatus: (user) => {
-    if (user.isFriend) {
-      dispatch(unfollowActionCreator(user.id));
-    } else {
-      dispatch(followActionCreator(user.id));
-    }
+  setNews: (news) => {
+    dispatch(setActionCreator(news));
   },
 });
 

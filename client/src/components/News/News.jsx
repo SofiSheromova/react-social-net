@@ -1,53 +1,30 @@
-import React, { Component } from 'react';
-// import style from './News.module.css';
-// import PropTypes from 'prop-types';
+import React from 'react';
+import * as axios from 'axios';
+import style from './News.module.css';
+import PropTypes from 'prop-types';
 
-class News extends Component {
-    // Initialize the state
-    constructor(props){
-        super(props);
-        this.state = {
-            list: []
-        }
+const News = ({news, setNews}) => {
+  axios.get('/api/getList').then((response) => {
+    console.log(response);
+    if (news.length === 0 ) {
+      setNews(response.data);
     }
+  });
+  return (
+    <div className={style.news}>
+      <h1>Your news</h1>
+      {
+        news.map((item) => {
+          return (<div key={item.id}>{item.content}</div>);
+        })
+      }
+    </div>
+  );
+};
 
-    // Fetch the list on first mount
-    componentDidMount() {
-        this.getList();
-    }
-
-    // Retrieves the list of items from the Express app
-    getList = () => {
-        fetch('/api/getList')
-            .then(res => res.json())
-            .then(list => this.setState({ list }))
-    }
-
-    render() {
-        const { list } = this.state;
-
-        return (
-            <div className="App">
-                <h1>Your news</h1>
-                {list.length ? (
-                    <div>
-                        {list.map(({id, content}) => {
-                            return(
-                                <div key={id}>
-                                    {content}
-                                </div>
-                            );
-                        })}
-                    </div>
-                ) : (
-                    <div>
-                        <h2>No news :(</h2>
-                    </div>
-                )
-                }
-            </div>
-        );
-    }
-}
+News.propTypes = {
+  news: PropTypes.object.isRequired,
+  setNews: PropTypes.func.isRequired,
+};
 
 export default News;
