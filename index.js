@@ -7,14 +7,14 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'client/public')));
 
 // An api endpoint that returns a short list of items
-app.get('/api/getList', (req,res) => {
-    const list = [
-        {id: 2301, content: "News1"},
-        {id: 2302, content: "News2"},
-        {id: 2303, content: "News3"},
-    ];
-    res.json(list);
-    console.log('Sent list of items');
+app.get('/api/getList', (req, res) => {
+  const list = [
+    {id: 2301, content: 'News1'},
+    {id: 2302, content: 'News2'},
+    {id: 2303, content: 'News3'},
+  ];
+  res.json(list);
+  console.log('Sent list of items');
 });
 
 // Handles any requests that don't match the ones above
