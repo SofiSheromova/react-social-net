@@ -9,9 +9,12 @@ class News extends React.Component {
    * Is invoked immediately after a component is mounted
    */
   componentDidMount() {
-    axios.get('/api/getNews')
-        .then((response) => {
-          this.props.setNews(response.data);
+    axios.get('/api/newsfeed.get')
+        .then((resp) => {
+          console.log(resp);
+          if (resp.data.response) {
+            this.props.setNews(resp.data.response.items);
+          }
         });
   }
 

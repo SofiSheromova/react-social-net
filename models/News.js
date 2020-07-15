@@ -9,6 +9,10 @@ const schema = new Schema({
     type: Number,
     default: 0,
   },
+  creationDate: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = model('News', schema);

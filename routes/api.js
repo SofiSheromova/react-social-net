@@ -1,18 +1,9 @@
-const News = require('../models/News');
+const newsfeedAPI = require('./api/newsfeed');
+const usersAPI = require('./api/users');
 
 module.exports = (app) => {
-  app.get('/api/getNews', async (req, res) => {
-    const news = await News.find({});
-    res.json(news);
-    console.log('Sent list of items');
-  });
-
-  app.post('/api/createNews', async (req, res) => {
-    const currentNews = new News({
-      content: req.body.content,
-    });
-
-    await currentNews.save();
-    res.json('success');
-  });
+  const routes = [newsfeedAPI, usersAPI];
+  for (const route of routes) {
+    route(app);
+  }
 };

@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
-const routes = require('./routes/api');
+const apiRoutes = require('./routes/api');
 const config = require('config');
 
 const app = express();
@@ -25,7 +25,7 @@ app.use((err, _req, _res, next) => {
   next();
 });
 
-routes(app);
+apiRoutes(app);
 
 const port = config.get('port');
 const mongodbUser = process.env.DB_USER;
