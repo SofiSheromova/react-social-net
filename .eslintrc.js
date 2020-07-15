@@ -20,7 +20,9 @@ module.exports = {
     },
     'plugins': [
         'react',
+        'babel',
     ],
+    "parser": "babel-eslint",
     'rules': {
     },
     'settings': {
