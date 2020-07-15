@@ -3,30 +3,30 @@ import * as axios from 'axios';
 import style from './News.module.css';
 import PropTypes from 'prop-types';
 
+/** Class representing a News Component. */
 class News extends React.Component {
-  constructor(props) {
-    super(props);
-    this.news = props.news;
-    this.setNews = props.setNews;
-  }
-
+  /**
+   * Is invoked immediately after a component is mounted
+   */
   componentDidMount() {
     axios.get('/api/getList')
         .then((response) => {
-          this.setNews(response.data);
+          this.props.setNews(response.data);
         });
   }
 
+  /**
+   * Render News React Component.
+   * @return {React.Component} News Component.
+   */
   render() {
     return (
-      <div>
-        <div className={style.news}>
-          {
-            this.news.map((item) => {
-              return <div key={item.id}>{item.content}</div>;
-            })
-          }
-        </div>
+      <div className={style.news}>
+        {
+          this.props.news.map((item) => {
+            return <div key={item.id}>{item.content}</div>;
+          })
+        }
       </div>
     );
   }
