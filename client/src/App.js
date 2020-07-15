@@ -23,11 +23,11 @@ const App = ({ownerData, mailData}) => {
         <Route path='/profile'>
           <Profile ownerData={ownerData}/>
         </Route>
-        <Route path='/news'>
-          <NewsContainer />
-        </Route>
         <Route path='/messages'>
           <Mail dialogs={mailData}/>
+        </Route>
+        <Route path='/news'>
+          <NewsContainer />
         </Route>
         <Route path='/people'>
           <UsersContainer />
