@@ -9,7 +9,7 @@ class News extends React.Component {
    * Is invoked immediately after a component is mounted
    */
   componentDidMount() {
-    axios.get('/api/getList')
+    axios.get('/api/getNews')
         .then((response) => {
           this.props.setNews(response.data);
         });
@@ -24,7 +24,7 @@ class News extends React.Component {
       <div className={style.news}>
         {
           this.props.news.map((item) => {
-            return <div key={item.id}>{item.content}</div>;
+            return <div key={item._id}>{item.content}</div>;
           })
         }
       </div>

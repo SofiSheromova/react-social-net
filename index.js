@@ -1,28 +1,53 @@
-const express = require('express');
 const path = require('path');
+
+const express = require('express');
+const mongoose = require('mongoose');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+
+const routes = require('./routes/api');
+const config = require('config');
 
 const app = express();
 
-// Serve the static files from the React app
-app.use(express.static(path.join(__dirname, 'client/public')));
+if (config.get('debug')) {
+  app.use(morgan('dev'));
+}
 
-// An api endpoint that returns a short list of items
-app.get('/api/getList', (req, res) => {
-  const list = [
-    {id: 2301, content: 'News1'},
-    {id: 2302, content: 'News2'},
-    {id: 2303, content: 'News3'},
-  ];
-  res.json(list);
-  console.log('Sent list of items');
+const publicDir = path.join(__dirname, 'client', 'public');
+
+app.use(express.urlencoded({extended: true}));
+app.use(express.static(publicDir));
+app.use(bodyParser.json());
+
+app.use((err, _req, _res, next) => {
+  console.error(err.stack);
+  next();
 });
 
-// Handles any requests that don't match the ones above
-// app.get('*', (req,res) =>{
-//     res.sendFile(path.join(__dirname+'/client/public/index.html'));
-// });
+routes(app);
 
-const port = process.env.PORT || 5000;
-app.listen(port);
+const port = config.get('port');
+const mongodbUser = process.env.DB_USER;
+const mongodbPassword = process.env.DB_PASSWORD;
+const mongodbDatabase = 'social-net';
 
-console.log('App is listening on port ' + port);
+/**
+ * App start function
+ */
+async function start() {
+  await mongoose.connect(
+      `mongodb+srv://${mongodbUser}:${mongodbPassword}@cluster0.aqlnn.mongodb.net/${mongodbDatabase}`,
+      {
+        useNewUrlParser: true,
+        useFindAndModify: false,
+        useUnifiedTopology: true,
+      },
+  );
+  app.listen(port, () => {
+    console.info(`Server started on ${port}`);
+    console.info(`Open http://localhost:${port}/`);
+  });
+}
+
+start();
