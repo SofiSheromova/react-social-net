@@ -1,6 +1,6 @@
 import {setActionCreator} from '../../redux/newsReducer';
 import {connect} from 'react-redux';
-import News from './News';
+import Newsfeed from './Newsfeed';
 
 const mapStateToProps = (state) => ({
   news: state.newsData,
@@ -12,6 +12,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-const NewsContainer = connect(mapStateToProps, mapDispatchToProps)(News);
+const NewsfeedContainer =
+    connect(mapStateToProps, mapDispatchToProps)(Newsfeed);
 
-export default NewsContainer;
+export default NewsfeedContainer;

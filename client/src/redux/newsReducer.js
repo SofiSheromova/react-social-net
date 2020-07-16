@@ -11,7 +11,7 @@ export const setActionCreator = (news) => ({
 
 export const newsReducer = function(state = initialState.news, action) {
   if (action.type === NewsChangesTypes.SET_NEWS) {
-    return [...state, ...action.news];
+    return action.news;
   }
   return state;
 };

@@ -8,7 +8,7 @@ import Footer from './components/Footer/Footer';
 import {Route} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import UsersContainer from './components/Users/UsersContainer';
-import NewsContainer from './components/News/NewsContainer';
+import NewsfeedContainer from './components/Newsfeed/NewsfeedContainer';
 
 const App = ({ownerData, mailData}) => {
   return (
@@ -27,7 +27,7 @@ const App = ({ownerData, mailData}) => {
           <Mail dialogs={mailData}/>
         </Route>
         <Route path='/news'>
-          <NewsContainer />
+          <NewsfeedContainer />
         </Route>
         <Route path='/people'>
           <UsersContainer />
