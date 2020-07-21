@@ -1,3 +1,17 @@
 .newsfeed {
 
 }
+
+.pageFlipper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.arrow {
+    margin: 10px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 0 120px;
+    border-top: 30px solid #eeeeee;
+}
