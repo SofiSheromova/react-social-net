@@ -7,20 +7,10 @@ import News from './News/News';
 /** Class representing a Newsfeed Component. */
 class Newsfeed extends React.Component {
   /**
-   * Getter for page size.
-   * @return {Number} page size.
-   */
-  get pageSize() {
-    return 10;
-  }
-  newsCount = 0;
-  currentPageNumber = 0;
-
-  /**
    * Is invoked immediately after a component is mounted
    */
   componentDidMount() {
-    this.newsRequest();
+    this.flipPage();
   }
 
   /**
@@ -45,12 +35,14 @@ class Newsfeed extends React.Component {
    * News Request
    */
   newsRequest() {
-    const url = this.buildUrl('/api/newsfeed.get',
-        {count: this.pageSize, offset: this.currentPageNumber * this.pageSize});
-    axios.get( url)
+    const url = this.buildUrl('/api/newsfeed.get', {
+      count: this.props.pageSize,
+      offset: this.props.currentPageNumber * this.props.pageSize,
+    });
+    axios.get(url)
         .then((resp) => {
           if (resp.data.response) {
-            this.newsCount = resp.data.response.count;
+            this.props.setNewsCount(resp.data.response.count);
             this.props.setNews(resp.data.response.items);
           }
         });
@@ -60,7 +52,7 @@ class Newsfeed extends React.Component {
    * Flip the page and news request.
    */
   flipPage() {
-    this.currentPageNumber += 1;
+    this.props.setCurrentPageNumber(this.props.currentPageNumber + 1);
     this.newsRequest();
   }
 
@@ -75,6 +67,8 @@ class Newsfeed extends React.Component {
       </div>
     );
     const loader = <div>Тут будет лоадер...</div>;
+    const newsExists = this.props.newsCount >
+        (this.props.currentPageNumber + 1) * this.props.pageSize;
     return (
       <div className={style.newsfeed}>
         {
@@ -83,7 +77,7 @@ class Newsfeed extends React.Component {
           })
         }
         {
-          this.newsCount > (this.currentPageNumber + 1) * this.pageSize ?
+          newsExists ?
               downloadButton :
               loader
         }
@@ -94,7 +88,12 @@ class Newsfeed extends React.Component {
 
 Newsfeed.propTypes = {
   news: PropTypes.array.isRequired,
+  newsCount: PropTypes.number.isRequired,
+  pageSize: PropTypes.number.isRequired,
+  currentPageNumber: PropTypes.number.isRequired,
   setNews: PropTypes.func.isRequired,
+  setNewsCount: PropTypes.func.isRequired,
+  setCurrentPageNumber: PropTypes.func.isRequired,
 };
 
 export default Newsfeed;

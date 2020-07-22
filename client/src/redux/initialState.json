@@ -71,5 +71,10 @@
       "avatar": "https://mytoys.scene7.com/is/image/myToys/ext/8422443-01.jpg?$l$"
     }
   ],
-  "news": []
+  "newsfeed": {
+    "news": [],
+    "pageSize": 5,
+    "newsCount": 0,
+    "currentPageNumber": 0
+  }
 }
