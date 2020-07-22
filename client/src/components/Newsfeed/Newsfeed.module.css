@@ -2,14 +2,16 @@
 
 }
 
-.pageFlipper {
+.fetchStatus {
     position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 30px;
+    padding: 10px;
 }
 
-.arrow {
-    margin: 10px;
+.arrowFlipper {
     border-style: solid;
     border-color: transparent;
     border-width: 0 120px;

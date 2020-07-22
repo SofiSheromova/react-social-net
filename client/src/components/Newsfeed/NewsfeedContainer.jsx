@@ -1,7 +1,7 @@
 import {
   setNewsActionCreator,
   setNewsCountActionCreator,
-  setCurrentPageNumberActionCreator,
+  setCurrentPageNumberActionCreator, toggleIsFetchingActionCreator,
 } from '../../redux/newsReducer';
 import {connect} from 'react-redux';
 import React from 'react';
@@ -44,12 +44,14 @@ class NewsfeedApiContainer extends React.Component {
       count: this.props.pageSize,
       offset: this.props.currentPageNumber * this.props.pageSize,
     });
+    this.props.toggleIsFetching(true);
     axios.get(url)
         .then((resp) => {
           if (resp.data.response) {
             this.props.setNewsCount(resp.data.response.count);
             this.props.setNews(resp.data.response.items);
           }
+          this.props.toggleIsFetching(false);
         });
   }
 
@@ -71,6 +73,7 @@ class NewsfeedApiContainer extends React.Component {
       newsCount={this.props.newsCount}
       pageSize={this.props.pageSize}
       currentPageNumber={this.props.currentPageNumber}
+      isFetching={this.props.isFetching}
       flipPage={this.flipPage.bind(this)}
     />;
   }
@@ -81,9 +84,11 @@ NewsfeedApiContainer.propTypes = {
   newsCount: PropTypes.number.isRequired,
   pageSize: PropTypes.number.isRequired,
   currentPageNumber: PropTypes.number.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   setNews: PropTypes.func.isRequired,
   setNewsCount: PropTypes.func.isRequired,
   setCurrentPageNumber: PropTypes.func.isRequired,
+  toggleIsFetching: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -91,6 +96,7 @@ const mapStateToProps = (state) => ({
   newsCount: state.newsData.newsCount,
   pageSize: state.newsData.pageSize,
   currentPageNumber: state.newsData.currentPageNumber,
+  isFetching: state.newsData.isFetching,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -102,6 +108,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setCurrentPageNumber: (currentPageNumber) => {
     dispatch(setCurrentPageNumberActionCreator(currentPageNumber));
+  },
+  toggleIsFetching: (isFetching) => {
+    dispatch(toggleIsFetchingActionCreator(isFetching));
   },
 });
 
