@@ -1,7 +1,8 @@
 import {
   setNewsActionCreator,
   setNewsCountActionCreator,
-  setCurrentPageNumberActionCreator, toggleIsFetchingActionCreator,
+  setCurrentPageNumberActionCreator,
+  toggleIsFetchingActionCreator,
 } from '../../redux/newsReducer';
 import {connect} from 'react-redux';
 import React from 'react';
@@ -114,7 +115,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-const NewsfeedContainer =
-    connect(mapStateToProps, mapDispatchToProps)(NewsfeedApiContainer);
+const NewsfeedContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(NewsfeedApiContainer);
 
 export default NewsfeedContainer;
