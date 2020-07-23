@@ -1,6 +1,8 @@
 import React from 'react';
 import style from './InputPost.module.css';
 import PropTypes from 'prop-types';
+import Button from '../../../MaterialComponents/Button';
+import TextField from '../../../MaterialComponents/TextField';
 
 const InputPost = ({inputText, onUpdateInput, onCreate}) => {
   /**
@@ -16,13 +18,16 @@ const InputPost = ({inputText, onUpdateInput, onCreate}) => {
 
   return (
     <form className={style.wrapper} onSubmit={submitHandler}>
-      <input
+      <TextField
+        label="Your post"
         className={style.input}
         value={inputText}
         onChange={onUpdateInput}
       />
-      <button className={style.button}
-        type="submit">add secret</button>
+      <Button
+        className={style.button}
+        type="submit"
+      >add post</Button>
     </form>
   );
 };

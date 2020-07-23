@@ -5,18 +5,22 @@ import React from 'react';
 const customTheme = createMuiTheme({
   palette: {
     primary: {
+      light: '#bf84a7',
       main: '#8e5678',
+      dark: '#5f2b4c',
     },
     secondary: {
-      main: '#ff80ab',
+      light: '#f2b4d8',
+      main: '#bf84a7',
+      dark: '#8e5678',
     },
   },
 });
 
-const CustomThemeProvider = ({children}) => {
+const CustomThemeProvider = (props) => {
   return (
-    <ThemeProvider theme={customTheme}>
-      {children}
+    <ThemeProvider theme={customTheme} {...props}>
+      {props.children}
     </ThemeProvider>
   );
 };

@@ -13,10 +13,10 @@ const style = (theme) => ({
 const BorderLinearProgress = withStyles(style)(LinearProgress);
 
 
-const CustomizedLinearProgress = () => {
+const CustomizedLinearProgress = (props) => {
   return (
     <ThemeProvider>
-      <BorderLinearProgress/>
+      <BorderLinearProgress {...props}/>
     </ThemeProvider>
   );
 };

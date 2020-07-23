@@ -1,7 +1,8 @@
 .post {
-    background: #f3eef0;
+    background: #ffffff;
     margin: 10px 0;
     padding: 10px;
     border-radius: 10px;
+    border: 1px solid #bf84a7;
     min-height: 50px;
 }
