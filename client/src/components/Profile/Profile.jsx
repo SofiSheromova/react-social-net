@@ -1,19 +1,13 @@
 import React from 'react';
 import style from './Profile.module.css';
-import Avatar from './Avatar/Avatar';
 import PostsWallContainer from './PostsWall/PostsWallContainer';
 import PropTypes from 'prop-types';
+import ProfileHead from './Head/Head';
 
 const Profile = ({ownerData}) => {
   return (
-    <div>
-      <div className={style.info}>
-        <div className={style.presentation}>
-          <div className={style.name}>{ownerData.name}</div>
-          <p className={style.description}>{ownerData.description}</p>
-        </div>
-        <Avatar linkImg={ownerData.linkImg}/>
-      </div>
+    <div className={style.profile}>
+      <ProfileHead ownerData={ownerData}/>
       <PostsWallContainer/>
     </div>
   );

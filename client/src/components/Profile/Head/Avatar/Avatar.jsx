@@ -2,11 +2,11 @@ import React from 'react';
 import style from './Avatar.module.css';
 import PropTypes from 'prop-types';
 
-const Avatar = ({linkImg}) => {
+const Avatar = ({src}) => {
   return (
     <div className={style.avatar}>
       <img className={style.avatarImg}
-        src={linkImg}
+        src={src}
         alt='avatar'
       />
     </div>
@@ -14,7 +14,7 @@ const Avatar = ({linkImg}) => {
 };
 
 Avatar.propTypes = {
-  linkImg: PropTypes.string,
+  src: PropTypes.string,
 };
 
 export default Avatar;
