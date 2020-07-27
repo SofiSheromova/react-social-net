@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Newsfeed.module.css';
 import PropTypes from 'prop-types';
-import News from './News/News';
+import NewsCard from './News/NewsCard';
 import LinearProgress from './Progress';
 
 const Newsfeed = ({
@@ -17,13 +17,16 @@ const Newsfeed = ({
   const loader = <div className={style.fetchStatus}>
     <LinearProgress/>
   </div>;
+
   return (
-    <div className={style.newsfeed}>
-      {
-        news.map((item) => {
-          return <News key={item._id} news={item}/>;
-        })
-      }
+    <div>
+      <div className={style.newsfeed}>
+        {
+          news.map((item) => {
+            return <NewsCard key={item._id} news={item}/>;
+          })
+        }
+      </div>
       {
           isFetching ?
               loader :
