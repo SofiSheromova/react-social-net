@@ -1,7 +1,6 @@
 import React from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import ThemeProvider from './ThemeProvider';
 
 const style = (theme) => ({
   root: {
@@ -15,9 +14,7 @@ const BorderLinearProgress = withStyles(style)(LinearProgress);
 
 const CustomizedLinearProgress = (props) => {
   return (
-    <ThemeProvider>
-      <BorderLinearProgress {...props}/>
-    </ThemeProvider>
+    <BorderLinearProgress {...props}/>
   );
 };
 

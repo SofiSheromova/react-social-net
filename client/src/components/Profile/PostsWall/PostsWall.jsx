@@ -6,17 +6,19 @@ import PropTypes from 'prop-types';
 
 const PostsWall = ({posts, addPost, updateInput, inputText}) => {
   return (
-    <div className={style.box}>
+    <div>
       <InputPost
         inputText={inputText}
         onUpdateInput={updateInput}
         onCreate={addPost}
       />
-      {
-        posts.map((post) => {
-          return <Post key={post.id} content={post.title}/>;
-        })
-      }
+      <div className={style.box}>
+        {
+          posts.map((post) => {
+            return <Post key={post.id} content={post.title}/>;
+          })
+        }
+      </div>
     </div>
   );
 };

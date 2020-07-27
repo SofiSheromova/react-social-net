@@ -2,7 +2,7 @@ import React from 'react';
 import style from './Newsfeed.module.css';
 import PropTypes from 'prop-types';
 import News from './News/News';
-import LinearProgress from '../MaterialComponents/Progress';
+import LinearProgress from './Progress';
 
 const Newsfeed = ({
   news, newsCount, currentPageNumber, pageSize, isFetching,

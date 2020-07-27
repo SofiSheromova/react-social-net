@@ -1,6 +1,5 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import ThemeProvider from './ThemeProvider';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import withStyles from '@material-ui/core/styles/withStyles';
 
@@ -34,14 +33,12 @@ const CustomizedTextField= (props) => {
   const classes = useStyles();
 
   return (
-    <ThemeProvider>
-      <CssTextField
-        multiline
-        className={classes.margin}
-        variant="outlined"
-        {...props}
-      />
-    </ThemeProvider>
+    <CssTextField
+      multiline
+      className={classes.margin}
+      variant="outlined"
+      {...props}
+    />
   );
 };
 

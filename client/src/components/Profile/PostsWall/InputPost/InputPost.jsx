@@ -1,8 +1,8 @@
 import React from 'react';
 import style from './InputPost.module.css';
 import PropTypes from 'prop-types';
-import Button from '../../../MaterialComponents/Button';
-import TextField from '../../../MaterialComponents/TextField';
+import TextField from './TextField';
+import Button from '@material-ui/core/Button';
 
 const InputPost = ({inputText, onUpdateInput, onCreate}) => {
   /**
@@ -24,10 +24,10 @@ const InputPost = ({inputText, onUpdateInput, onCreate}) => {
         value={inputText}
         onChange={onUpdateInput}
       />
-      <Button
-        className={style.button}
-        type="submit"
-      >add post</Button>
+      <Button variant="contained" color="primary"
+        type="submit" className={style.button}>
+            add post
+      </Button>
     </form>
   );
 };

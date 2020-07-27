@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 
 const Post = ({content}) => {
   return (
-    <div className={style.post}>
-      {content}
+    <div className={style.wrap}>
+      <div className={style.post}>
+        {content}
+      </div>
     </div>
   );
 };
