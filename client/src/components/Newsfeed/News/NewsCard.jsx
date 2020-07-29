@@ -22,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
     margin: 20,
   },
   media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
+    objectFit: 'none',
+    maxHeight: '500px',
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -65,6 +65,7 @@ const NewsCard = ({news}) => {
         subheader={new Date(news.creationDate).toDateString()}
       />
       <CardMedia
+        component="img"
         className={classes.media}
         image={news.photo || newsPhoto}
         title="News"
