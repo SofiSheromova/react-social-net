@@ -32,6 +32,13 @@ const mongodbUser = process.env.DB_USER;
 const mongodbPassword = process.env.DB_PASSWORD;
 const mongodbDatabase = 'social-net';
 
+process.on('unhandledRejection', function(reason, p) {
+  console.log(
+      'Possibly Unhandled Rejection at: Promise ', p,
+      '\nReason: ', reason,
+  );
+});
+
 /**
  * App start function
  */
