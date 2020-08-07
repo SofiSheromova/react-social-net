@@ -1,7 +1,7 @@
 const {validationResult, query} = require('express-validator');
 const {Types} = require('mongoose');
 
-module.exports.defaultParams = {
+const defaultParams = {
   count: 50,
   getCount(count) {
     return count === undefined ? this.count : count;
@@ -12,7 +12,7 @@ module.exports.defaultParams = {
   },
 };
 
-module.exports.validationChains = {
+const validationChains = {
   access_token() {
     return query('access_token')
         .exists({checkNull: true, checkFalsy: true});
@@ -20,14 +20,55 @@ module.exports.validationChains = {
   id(fieldName='id') {
     return query(fieldName)
         .exists({checkNull: true, checkFalsy: true})
-        .isLength({min: 24, max: 24})
+        .custom((id) => Types.ObjectId.isValid(id))
+        .withMessage('Invalid ID: Argument passed in must be a single ' +
+            'String of 12 bytes or a string of 24 hex characters.')
         .bail()
-        .customSanitizer((value) => new Types.ObjectId(value));
+        .customSanitizer((id) => new Types.ObjectId(id));
   },
   ids() {
     return query('ids')
         .exists({checkNull: true, checkFalsy: true})
-        .customSanitizer((value) => value.split(','));
+        .customSanitizer((value) => value.split(','))
+        .custom((ids) => ids.length <= defaultParams.getCount())
+        .withMessage('Too many ids. ' +
+          `No more than ${defaultParams.getCount()} elements.`)
+        .bail()
+        .custom((ids) => {
+          return ids.reduce((acc, id) =>
+            acc && Types.ObjectId.isValid(id), true);
+        })
+        .withMessage('Invalid ID: Argument passed in must be a single ' +
+          'String of 12 bytes or a string of 24 hex characters.')
+        .bail()
+        .customSanitizer((ids) => {
+          return ids.map((id) => new Types.ObjectId(id));
+        });
+  },
+  firstName() {
+    return query('first_name')
+        .exists()
+        .isString().isLength({max: 100});
+  },
+  lastName() {
+    return query('last_name')
+        .exists()
+        .isString().isLength({max: 100});
+  },
+  email() {
+    return query('email')
+        .exists()
+        .isEmail();
+  },
+  password() {
+    return query('password')
+        .exists()
+        .isString().isLength({max: 100});
+  },
+  date(fieldName='date') {
+    return query(fieldName)
+        .exists()
+        .isDate(['YYYY-MM-DD']);
   },
   count(min=0, max=50) {
     return query('count')
@@ -57,20 +98,25 @@ module.exports.validationChains = {
   },
 };
 
+const errorFormatter = ({location, msg, param, value, nestedErrors}) => {
+  return {
+    code: msg.split(',', 1)[0],
+    location, param, value, msg, nestedErrors,
+  };
+};
+
 const checkErrors = (req) => {
-  const errors = validationResult(req);
+  const errors = validationResult(req).formatWith(errorFormatter);
   if (!errors.isEmpty()) {
     return errors.array();
   }
 };
-module.exports.checkErrors = checkErrors;
 
 const sendError = (res, errors) => {
   return res.status(422).json({errors});
 };
-module.exports.sendError = sendError;
 
-module.exports.errorChecker = (controller) => {
+const errorChecker = (controller) => {
   return (req, res) => {
     const errors = checkErrors(req);
     if (errors) {
@@ -78,4 +124,13 @@ module.exports.errorChecker = (controller) => {
     }
     return controller(req, res);
   };
+};
+
+module.exports = {
+  defaultParams,
+  validationChains,
+  checkErrors,
+  sendError,
+  errorChecker,
+  errorFormatter,
 };

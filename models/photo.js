@@ -5,7 +5,7 @@ const PhotoSchema = new Schema(
       source: {type: String, required: true},
       date: {type: Date, default: Date.now},
       text: {type: String, max: 100},
-      owner_id: {type: Schema.ObjectId, ref: 'User'},
+      ownerId: {type: Schema.ObjectId, ref: 'User'},
     },
 );
 

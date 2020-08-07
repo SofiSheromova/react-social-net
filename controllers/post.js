@@ -1,5 +1,10 @@
 const Post = require('../models/post');
-const {defaultParams, errorChecker} = require('./validations');
+const {
+  defaultParams,
+  errorChecker,
+  errorFormatter,
+  sendError,
+} = require('./validations');
 
 // Get list of all posts.
 module.exports.list = errorChecker(async (req, res) => {
@@ -29,19 +34,18 @@ module.exports.info = errorChecker((req, res) => {
 module.exports.create = errorChecker(async (req, res) => {
   const params = {
     access_token: req.query.access_token,
-    owner_id: req.query.owner_id,
+    ownerId: req.query.owner_id,
     title: req.query.title,
     text: req.query.text,
     attachments: req.query.attachments,
   };
 
   if (!params.text && !params.attachments) {
-    console.log('error');
-    // sendError(res, {
-    //   'msg': 'At least one of the values must be defined',
-    //   'param': 'text,attachments',
-    //   'location': 'query',
-    // });
+    return sendError(res, errorFormatter({
+      location: 'query',
+      param: 'text|attachments',
+      msg: 'At least one of the values must be defined',
+    }));
   }
 
   // TODO: attachments check
@@ -49,7 +53,7 @@ module.exports.create = errorChecker(async (req, res) => {
   const post = new Post({
     title: params.title,
     text: params.text,
-    owner_id: params.owner_id,
+    ownerId: params.ownerId,
     photos: params.attachments,
   });
 
