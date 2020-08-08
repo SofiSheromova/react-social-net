@@ -1,27 +1,27 @@
 const Message = require('../models/message');
-const {errorChecker} = require('./validations');
+const {errorHandler} = require('./validations');
 
 // Get list of all messages.
-exports.list = errorChecker((req, res) => {
+exports.list = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Message list');
 });
 
 // Get information for a specific message.
-exports.info = errorChecker((req, res) => {
+exports.info = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Message detail: ' + req.params.id);
 });
 
 // Handle message create on POST.
-exports.create = errorChecker((req, res) => {
+exports.create = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Message create POST');
 });
 
 // Handle message delete on POST.
-exports.delete = errorChecker((req, res) => {
+exports.delete = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Message delete POST');
 });
 
 // Handle message update on POST.
-exports.update = errorChecker((req, res) => {
+exports.update = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Message update POST');
 });

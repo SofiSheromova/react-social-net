@@ -4,9 +4,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const createError = require('http-errors');
 
-const apiRoutes = require('./routes/api');
 const config = require('config');
+const apiRoutes = require('./routes/api');
+const errorMiddleware = require('./middleware/error');
 
 const app = express();
 
@@ -20,12 +22,13 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static(publicDir));
 app.use(bodyParser.json());
 
-app.use((err, _req, _res, next) => {
-  console.error(err.stack);
-  next();
+apiRoutes(app);
+
+app.all('*', (req, res, next) => {
+  next(createError(404, `Can't find ${req.originalUrl} on this server!`));
 });
 
-apiRoutes(app);
+errorMiddleware(app);
 
 const port = config.get('port');
 const mongodbUser = process.env.DB_USER;

@@ -1,27 +1,27 @@
 const Chat = require('../models/chat');
-const {errorChecker} = require('./validations');
+const {errorHandler} = require('./validations');
 
 // Get list of all chats.
-exports.list = errorChecker((req, res) => {
+exports.list = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Chat list');
 });
 
 // Get information for a specific chat.
-exports.info = errorChecker((req, res) => {
+exports.info = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Chat detail: ' + req.params.id);
 });
 
 // Handle chat create on POST.
-exports.create = errorChecker((req, res) => {
+exports.create = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Chat create POST');
 });
 
 // Handle chat delete on POST.
-exports.delete = errorChecker((req, res) => {
+exports.delete = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Chat delete POST');
 });
 
 // Handle chat update on POST.
-exports.update = errorChecker((req, res) => {
+exports.update = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Chat update POST');
 });

@@ -1,13 +1,13 @@
 const Post = require('../models/post');
 const {
   defaultParams,
-  errorChecker,
+  errorHandler,
   errorFormatter,
   sendError,
 } = require('./validations');
 
 // Get list of all posts.
-module.exports.list = errorChecker(async (req, res) => {
+module.exports.list = errorHandler(async (req, res) => {
   const params = {
     access_token: req.query.access_token,
     count: defaultParams.getCount(req.query.count),
@@ -25,13 +25,13 @@ module.exports.list = errorChecker(async (req, res) => {
 });
 
 // Get information for a specific post.
-module.exports.info = errorChecker((req, res) => {
+module.exports.info = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Post detail: ' + req.query.access_token);
   console.log(req.query);
 });
 
 // Handle post create on POST.
-module.exports.create = errorChecker(async (req, res) => {
+module.exports.create = errorHandler(async (req, res) => {
   const params = {
     access_token: req.query.access_token,
     ownerId: req.query.owner_id,
@@ -62,13 +62,13 @@ module.exports.create = errorChecker(async (req, res) => {
 });
 
 // Handle post delete on POST.
-module.exports.delete = errorChecker((req, res) => {
+module.exports.delete = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Post delete POST');
   console.log(req.query);
 });
 
 // Handle post update on POST.
-module.exports.update = errorChecker((req, res) => {
+module.exports.update = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Post update POST');
   console.log(req.query);
 });

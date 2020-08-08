@@ -1,8 +1,9 @@
 const User = require('../models/user');
-const {defaultParams, errorChecker} = require('./validations');
+const {defaultParams, errorHandler} = require('./validations');
+const createError = require('http-errors');
 
 // Get list of all users.
-module.exports.list = errorChecker(async (req, res) => {
+module.exports.list = errorHandler(async (req, res) => {
   const params = {
     access_token: req.query.access_token,
     count: defaultParams.getCount(req.query.count),
@@ -20,7 +21,7 @@ module.exports.list = errorChecker(async (req, res) => {
 });
 
 // Get information for a specific user.
-module.exports.info = errorChecker(async (req, res) => {
+module.exports.info = errorHandler(async (req, res) => {
   const params = {
     access_token: req.query.access_token,
     ids: req.query.ids,
@@ -35,7 +36,7 @@ module.exports.info = errorChecker(async (req, res) => {
 });
 
 // Handle user create on POST.
-module.exports.create = errorChecker(async (req, res) => {
+module.exports.create = errorHandler(async (req, res) => {
   const params = {
     access_token: req.query.access_token,
     firstName: req.query.first_name,
@@ -57,7 +58,7 @@ module.exports.create = errorChecker(async (req, res) => {
 });
 
 // Handle user delete on POST.
-module.exports.delete = errorChecker(async (req, res) => {
+module.exports.delete = errorHandler(async (req, res, next) => {
   const params = {
     access_token: req.query.access_token,
     id: req.query.id,
@@ -65,6 +66,10 @@ module.exports.delete = errorChecker(async (req, res) => {
   };
 
   const user = await User.findById(params.id);
+  if (!user) {
+    throw createError(404, 'No user found with that ID');
+  }
+
   if (user.validPassword(params.password)) {
     await user.remove();
     res.json({response: 'success'});
@@ -74,7 +79,7 @@ module.exports.delete = errorChecker(async (req, res) => {
 });
 
 // Handle user update on POST.
-module.exports.update = errorChecker(async (req, res) => {
+module.exports.update = errorHandler(async (req, res) => {
   const params = {
     access_token: req.query.access_token,
     id: req.query.id,

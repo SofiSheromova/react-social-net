@@ -1,5 +1,6 @@
 const {validationResult, query} = require('express-validator');
 const {Types} = require('mongoose');
+const createError = require('http-errors');
 
 const defaultParams = {
   count: 50,
@@ -20,6 +21,7 @@ const validationChains = {
   id(fieldName='id') {
     return query(fieldName)
         .exists({checkNull: true, checkFalsy: true})
+        .bail()
         .custom((id) => Types.ObjectId.isValid(id))
         .withMessage('Invalid ID: Argument passed in must be a single ' +
             'String of 12 bytes or a string of 24 hex characters.')
@@ -29,6 +31,7 @@ const validationChains = {
   ids() {
     return query('ids')
         .exists({checkNull: true, checkFalsy: true})
+        .bail()
         .customSanitizer((value) => value.split(','))
         .custom((ids) => ids.length <= defaultParams.getCount())
         .withMessage('Too many ids. ' +
@@ -99,10 +102,7 @@ const validationChains = {
 };
 
 const errorFormatter = ({location, msg, param, value, nestedErrors}) => {
-  return {
-    code: msg.split(',', 1)[0],
-    location, param, value, msg, nestedErrors,
-  };
+  return {location, msg, param, value, nestedErrors};
 };
 
 const checkErrors = (req) => {
@@ -116,21 +116,30 @@ const sendError = (res, errors) => {
   return res.status(422).json({errors});
 };
 
-const errorChecker = (controller) => {
-  return (req, res) => {
-    const errors = checkErrors(req);
+const validationErrorHandler = (fn) =>
+  function(...args) {
+    const errors = checkErrors(args[0]);
     if (errors) {
-      return sendError(res, errors);
+      throw createError(400, 'Validation Error', {details: errors});
     }
-    return controller(req, res);
+    return fn(...args);
   };
-};
+
+const asyncHandler = (fn) =>
+  function(...args) {
+    const fnReturn = fn(...args);
+    const next = args[args.length - 1];
+    return Promise.resolve(fnReturn).catch(next);
+  };
+
+const errorHandler = (fn) =>
+  asyncHandler(validationErrorHandler(fn));
 
 module.exports = {
   defaultParams,
   validationChains,
   checkErrors,
   sendError,
-  errorChecker,
+  errorHandler,
   errorFormatter,
 };

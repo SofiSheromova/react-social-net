@@ -1,27 +1,27 @@
 const Photo = require('../models/photo');
-const {errorChecker} = require('./validations');
+const {errorHandler} = require('./validations');
 
 // Get list of all photos.
-exports.list = errorChecker((req, res) => {
+exports.list = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Photo list');
 });
 
 // Get information for a specific photo.
-exports.info = errorChecker((req, res) => {
+exports.info = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Photo detail: ' + req.params.id);
 });
 
 // Handle photo create on POST.
-exports.create = errorChecker((req, res) => {
+exports.create = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Photo create POST');
 });
 
 // Handle photo delete on POST.
-exports.delete = errorChecker((req, res) => {
+exports.delete = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Photo delete POST');
 });
 
 // Handle photo update on POST.
-exports.update = errorChecker((req, res) => {
+exports.update = errorHandler((req, res) => {
   res.send('NOT IMPLEMENTED: Photo update POST');
 });
