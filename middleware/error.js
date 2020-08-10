@@ -1,10 +1,14 @@
+const {logger} = require('./logger');
+
 const sendErrorDev = (err, res) => {
-  res.status(err.status).json({
+  const errorInfo = {
     status: err.status,
     message: err.message,
     details: err.details,
     stack: err.stack,
-  });
+  };
+  logger.error(errorInfo);
+  res.status(err.status).json(errorInfo);
 };
 
 const sendErrorProd = (err, res) => {

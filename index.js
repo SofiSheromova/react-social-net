@@ -11,8 +11,7 @@ const errorMiddleware = require('./middleware/error');
 const {logger, useRequestLogger} = require('./middleware/logger');
 
 process.on('uncaughtException', (err) => {
-  logger.error(`Possibly Uncaught Exception: ${err.name},\n
-  Message: ${err.message}`);
+  logger.error('Possibly Uncaught Exception. \n%O', err);
 
   process.exit(1);
 });
@@ -39,8 +38,8 @@ const mongodbUser = process.env.DB_USER;
 const mongodbPassword = process.env.DB_PASSWORD;
 const mongodbDatabase = 'social-net';
 
-process.on('unhandledRejection', function(reason) {
-  logger.error('Possibly Unhandled Rejection.\n%O', reason);
+process.on('unhandledRejection', function(err) {
+  logger.error('Possibly Unhandled Rejection.\n%O', err);
 
   process.exit(1);
 });
