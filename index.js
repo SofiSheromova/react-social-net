@@ -58,8 +58,8 @@ async function start() {
       },
   );
   app.listen(port, () => {
-    logger.info(`Server started on ${port}`);
-    logger.info(`Open http://localhost:${port}/`);
+    console.info(`Server started on ${port}`);
+    console.info(`Open http://localhost:${port}/`);
   });
 }
 
