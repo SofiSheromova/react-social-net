@@ -5,8 +5,8 @@ module.exports = (app) => {
   // GET request for list of all Post items.
   app.get('/api/wall.get', [
     validationChains.access_token(),
-    validationChains.count(),
-    validationChains.offset(),
+    validationChains.count().optional(),
+    validationChains.offset().optional(),
   ], postController.list);
 
   // GET request for one Post.

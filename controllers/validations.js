@@ -1,4 +1,4 @@
-const {validationResult, query} = require('express-validator');
+const {validationResult, query, oneOf} = require('express-validator');
 const {Types} = require('mongoose');
 const createError = require('http-errors');
 
@@ -14,14 +14,18 @@ const defaultParams = {
 };
 
 const validationChains = {
+  exist(fields, options, message='The parameter must exist.') {
+    return query(fields)
+        .exists(options).bail()
+        .withMessage(message);
+  },
   access_token() {
-    return query('access_token')
-        .exists({checkNull: true, checkFalsy: true});
+    return this.exist('access_token',
+        {checkFalsy: true, checkNull: true});
   },
   id(fieldName='id') {
-    return query(fieldName)
-        .exists({checkNull: true, checkFalsy: true})
-        .bail()
+    return this.exist(fieldName,
+        {checkNull: true, checkFalsy: true})
         .custom((id) => Types.ObjectId.isValid(id))
         .withMessage('Invalid ID: Argument passed in must be a single ' +
             'String of 12 bytes or a string of 24 hex characters.')
@@ -29,9 +33,8 @@ const validationChains = {
         .customSanitizer((id) => new Types.ObjectId(id));
   },
   ids() {
-    return query('ids')
-        .exists({checkNull: true, checkFalsy: true})
-        .bail()
+    return this.exist('ids',
+        {checkNull: true, checkFalsy: true})
         .customSanitizer((value) => value.split(','))
         .custom((ids) => ids.length <= defaultParams.getCount())
         .withMessage('Too many ids. ' +
@@ -48,56 +51,48 @@ const validationChains = {
           return ids.map((id) => new Types.ObjectId(id));
         });
   },
-  firstName() {
-    return query('first_name')
-        .exists()
-        .isString().isLength({max: 100});
-  },
-  lastName() {
-    return query('last_name')
-        .exists()
+  name(fieldName='name') {
+    return this.exist(fieldName)
         .isString().isLength({max: 100});
   },
   email() {
-    return query('email')
-        .exists()
+    return this.exist('email')
         .isEmail();
   },
   password() {
-    return query('password')
-        .exists()
+    return this.exist('password')
         .isString().isLength({max: 100});
   },
   date(fieldName='date') {
-    return query(fieldName)
-        .exists()
+    return this.exist(fieldName)
         .isDate(['YYYY-MM-DD']);
   },
   count(min=0, max=50) {
-    return query('count')
-        .optional()
+    return this.exist('count')
         .isInt({min, max}).toInt();
   },
   offset(min = 0, max = undefined) {
     const options = max ? {min, max} : {min};
-    return query('offset')
-        .optional()
+    return this.exist('offset')
         .isInt(options).toInt();
   },
   text() {
-    return query('text')
-        .optional()
+    return this.exist('text')
         .isString().isLength({max: 2000});
   },
   title() {
-    return query('title')
-        .exists()
+    return this.exist('title')
         .isString().isLength({max: 100});
   },
   attachments() {
-    return query('attachments')
-        .optional()
+    return this.exist('attachments')
         .customSanitizer((value) => value.split(','));
+  },
+  existOneOf(...params) {
+    return oneOf(
+        params.map((param) => this.exist(param)),
+        `One of the parameters (${params.join(', ')}) must exist.`,
+    );
   },
 };
 

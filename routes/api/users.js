@@ -16,8 +16,8 @@ module.exports = (app) => {
   // POST request for creating User.
   app.post('/api/users.create', [
     validationChains.access_token(),
-    validationChains.firstName(),
-    validationChains.lastName(),
+    validationChains.name('fist_name'),
+    validationChains.name('last_name'),
     validationChains.email(),
     validationChains.password(),
   ], userController.create);
@@ -33,8 +33,8 @@ module.exports = (app) => {
   app.post('/api/users.update', [
     validationChains.access_token(),
     validationChains.id(),
-    validationChains.firstName().optional(),
-    validationChains.lastName().optional(),
+    validationChains.name('first_name').optional(),
+    validationChains.name('last_name').optional(),
     validationChains.date('date_of_birth').optional(),
     validationChains.email().optional(),
   ], userController.update);

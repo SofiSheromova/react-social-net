@@ -5,8 +5,8 @@ module.exports = (app) => {
   // GET request for list of all Post items.
   app.get('/api/wall.get', [
     validationChains.access_token(),
-    validationChains.count(),
-    validationChains.offset(),
+    validationChains.count().optional(),
+    validationChains.offset().optional(),
   ], postController.list);
 
   // GET request for one Post.
@@ -19,9 +19,10 @@ module.exports = (app) => {
   app.post('/api/wall.create', [
     validationChains.access_token(),
     validationChains.id('owner_id'),
-    validationChains.text(),
     validationChains.title(),
-    validationChains.attachments(),
+    validationChains.text().optional(),
+    validationChains.attachments().optional(),
+    validationChains.existOneOf('text', 'attachments'),
   ], postController.create);
 
   // POST request to delete Post.
@@ -36,7 +37,7 @@ module.exports = (app) => {
     validationChains.access_token(),
     validationChains.id('owner_id'),
     validationChains.id('post_id'),
-    validationChains.text(),
-    validationChains.attachments(),
+    validationChains.text().optional(),
+    validationChains.attachments().optional(),
   ], postController.update);
 };

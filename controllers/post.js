@@ -2,8 +2,6 @@ const Post = require('../models/post');
 const {
   defaultParams,
   errorHandler,
-  errorFormatter,
-  sendError,
 } = require('./validations');
 
 // Get list of all posts.
@@ -40,13 +38,13 @@ module.exports.create = errorHandler(async (req, res) => {
     attachments: req.query.attachments,
   };
 
-  if (!params.text && !params.attachments) {
-    return sendError(res, errorFormatter({
-      location: 'query',
-      param: 'text|attachments',
-      msg: 'At least one of the values must be defined',
-    }));
-  }
+  // if (!params.text && !params.attachments) {
+  //   return sendError(res, errorFormatter({
+  //     location: 'query',
+  //     param: 'text|attachments',
+  //     msg: 'At least one of the values must be defined',
+  //   }));
+  // }
 
   // TODO: attachments check
 
