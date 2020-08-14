@@ -28,16 +28,15 @@ module.exports = (app) => {
   // POST request to delete Post.
   app.post('/api/wall.delete', [
     validationChains.access_token(),
-    validationChains.id('post_id'),
-    validationChains.id('owner_id'),
+    validationChains.id(),
   ], postController.delete);
 
   // POST request to update Post.
   app.post('/api/wall.update', [
     validationChains.access_token(),
-    validationChains.id('owner_id'),
-    validationChains.id('post_id'),
+    validationChains.id(),
     validationChains.text().optional(),
     validationChains.attachments().optional(),
+    validationChains.existOneOf('text', 'attachments'),
   ], postController.update);
 };

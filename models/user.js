@@ -1,4 +1,5 @@
 const {Schema, model} = require('mongoose');
+const {formatDateToSend} = require('./helpers');
 // const uniqueValidator = require('mongoose-unique-validator');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
@@ -55,14 +56,8 @@ UserSchema.methods.generateJWT = function() {
 UserSchema.methods.toAuthJSON = function() {
   return {
     id: this._id,
-    firstName: this.firstName,
-    lastName: this.lastName,
     email: this.email,
-    dateOfBirth: this.dateOfBirth,
-    city: this.city,
-    avatar: this.avatar,
-    friends: this.friends,
-    subscriptions: this.subscriptions,
+    token: this.generateJWT(),
   };
 };
 
@@ -72,5 +67,23 @@ UserSchema
       // eslint-disable-next-line no-invalid-this
       return this.firstName + ', ' + this.lastName;
     });
+
+if (!UserSchema.options.toObject) {
+  UserSchema.options.toObject = {};
+}
+UserSchema.options.toObject.versionKey = false;
+UserSchema.options.toObject.transform = function(doc, ret, options) {
+  return {
+    id: doc._id,
+    firstName: doc.firstName,
+    lastName: doc.lastName,
+    email: doc.email,
+    dateOfBirth: formatDateToSend(doc.dateOfBirth),
+    city: doc.city,
+    avatar: doc.avatar,
+    friends: doc.friends,
+    subscriptions: doc.subscriptions,
+  };
+};
 
 module.exports = model('User', UserSchema);

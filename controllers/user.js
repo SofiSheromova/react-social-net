@@ -10,13 +10,14 @@ module.exports.list = errorHandler(async (req, res) => {
     offset: defaultParams.getOffset(req.query.offset),
   };
 
-  const post = await User.find({})
-      .sort('-date')
+  const users = (await User.find({})
       .skip(params.offset)
-      .limit(params.count);
+      .limit(params.count))
+      .map((user) => user)
+      .map((user) => user.toObject());
   const count = await User.count({});
   res.json({
-    response: {count, items: post},
+    response: {count, items: users},
   });
 });
 
@@ -26,10 +27,12 @@ module.exports.info = errorHandler(async (req, res) => {
     access_token: req.query.access_token,
     ids: req.query.ids,
   };
-  const users = (await Promise.all(params.ids.map((id) =>
-    User.findOne({_id: id}))))
+  const users = (await Promise.all(
+      params.ids.map((id) => {
+        return User.findById(id);
+      })))
       .filter((user) => user)
-      .map((user) => user.toAuthJSON());
+      .map((user) => user.toObject());
   res.json({
     response: {count: users.length, items: users},
   });
@@ -70,12 +73,12 @@ module.exports.delete = errorHandler(async (req, res, next) => {
     throw createError(404, 'No user found with that ID');
   }
 
-  if (user.validPassword(params.password)) {
-    await user.remove();
-    res.json({response: 'success'});
-  } else {
-    res.json({error: 'Wrong password'});
+  if (!user.validPassword(params.password)) {
+    throw createError(403, 'Wrong password.');
   }
+
+  await user.remove();
+  res.json({response: 'success'});
 });
 
 // Handle user update on POST.
@@ -89,12 +92,15 @@ module.exports.update = errorHandler(async (req, res) => {
     dateOfBirth: req.query.date_of_birth,
   };
 
-  await User.findOneAndUpdate({_id: params.id}, {
+  const updatedUser = await User.findOneAndUpdate({_id: params.id}, {
     firstName: params.firstName,
     lastName: params.lastName,
     email: params.email,
     dateOfBirth: params.dateOfBirth,
-  }, {omitUndefined: true});
+  }, {new: true, omitUndefined: true});
+  if (!updatedUser) {
+    throw createError(404, 'No user found with that ID');
+  }
 
   res.json({response: 'success'});
 });

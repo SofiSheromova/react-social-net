@@ -1,4 +1,5 @@
-const {Schema, model, Types} = require('mongoose');
+const {Schema, model} = require('mongoose');
+const {renameProperty, formatDateToSend} = require('./helpers');
 
 const PostSchema = new Schema({
   title: {type: String, max: 100, required: true},
@@ -9,5 +10,14 @@ const PostSchema = new Schema({
   date: {type: Date, default: Date.now},
 });
 
-module.exports.ObjectId = Types.ObjectId;
+if (!PostSchema.options.toObject) {
+  PostSchema.options.toObject = {};
+}
+PostSchema.options.toObject.versionKey = false;
+PostSchema.options.toObject.transform = function(doc, ret, options) {
+  renameProperty(ret, '_id', 'id');
+  ret.date = formatDateToSend(ret.date);
+  return ret;
+};
+
 module.exports = model('Post', PostSchema);

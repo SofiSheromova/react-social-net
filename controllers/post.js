@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const createError = require('http-errors');
 const {
   defaultParams,
   errorHandler,
@@ -23,9 +24,20 @@ module.exports.list = errorHandler(async (req, res) => {
 });
 
 // Get information for a specific post.
-module.exports.info = errorHandler((req, res) => {
-  res.send('NOT IMPLEMENTED: Post detail: ' + req.query.access_token);
-  console.log(req.query);
+module.exports.info = errorHandler(async (req, res) => {
+  const params = {
+    access_token: req.query.access_token,
+    ids: req.query.ids,
+  };
+  const posts = (await Promise.all(
+      params.ids.map((id) => {
+        return Post.findById(id);
+      })))
+      .filter((post) => post)
+      .map((post) => post.toObject());
+  res.json({
+    response: {count: posts.length, items: posts},
+  });
 });
 
 // Handle post create on POST.
@@ -37,14 +49,6 @@ module.exports.create = errorHandler(async (req, res) => {
     text: req.query.text,
     attachments: req.query.attachments,
   };
-
-  // if (!params.text && !params.attachments) {
-  //   return sendError(res, errorFormatter({
-  //     location: 'query',
-  //     param: 'text|attachments',
-  //     msg: 'At least one of the values must be defined',
-  //   }));
-  // }
 
   // TODO: attachments check
 
@@ -60,13 +64,38 @@ module.exports.create = errorHandler(async (req, res) => {
 });
 
 // Handle post delete on POST.
-module.exports.delete = errorHandler((req, res) => {
-  res.send('NOT IMPLEMENTED: Post delete POST');
-  console.log(req.query);
+module.exports.delete = errorHandler(async (req, res) => {
+  const params = {
+    access_token: req.query.access_token,
+    id: req.query.id,
+  };
+
+  const post = await Post.findById(params.id);
+  if (!post) {
+    throw createError(404, 'No post found with that ID');
+  }
+
+  await post.remove();
+  res.json({response: 'success'});
 });
 
 // Handle post update on POST.
-module.exports.update = errorHandler((req, res) => {
-  res.send('NOT IMPLEMENTED: Post update POST');
-  console.log(req.query);
+module.exports.update = errorHandler(async (req, res) => {
+  const params = {
+    access_token: req.query.access_token,
+    id: req.query.id,
+    text: req.query.text,
+    attachments: req.query.attachments,
+  };
+
+  const updatedPost = await Post.findOneAndUpdate({_id: params.id}, {
+    access_token: params.access_token,
+    text: params.text,
+    attachments: params.attachments,
+  }, {new: true, omitUndefined: true});
+  if (!updatedPost) {
+    throw createError(404, 'No post found with that ID');
+  }
+
+  res.json({response: 'success'});
 });
