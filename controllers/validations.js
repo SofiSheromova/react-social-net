@@ -1,4 +1,5 @@
-const {validationResult, query, oneOf} = require('express-validator');
+const {body, cookie, header, param, query,
+  validationResult, oneOf} = require('express-validator');
 const {Types} = require('mongoose');
 const createError = require('http-errors');
 
@@ -13,9 +14,26 @@ const defaultParams = {
   },
 };
 
-const validationChains = {
+const validationChains = (location='query') => ({
+  defineMethod() {
+    switch (location) {
+      case 'body':
+        return body;
+      case 'cookies':
+        return cookie;
+      case 'headers':
+        return header;
+      case 'params':
+        return param;
+      case 'query':
+        return query;
+      default:
+        createError(500, 'Unrecognized location. The following objects ' +
+            'are possible: "body", "cookies", "headers", "params", "query"');
+    }
+  },
   exist(fields, options, message='The parameter must exist.') {
-    return query(fields)
+    return this.defineMethod()(fields)
         .exists(options).bail()
         .withMessage(message);
   },
@@ -94,7 +112,7 @@ const validationChains = {
         `One of the parameters (${params.join(', ')}) must exist.`,
     );
   },
-};
+});
 
 const errorFormatter = ({location, msg, param, value, nestedErrors}) => {
   return {location, msg, param, value, nestedErrors};

@@ -1,6 +1,6 @@
 const {Schema, model} = require('mongoose');
 const {formatDateToSend} = require('./helpers');
-// const uniqueValidator = require('mongoose-unique-validator');
+const uniqueValidator = require('mongoose-unique-validator');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const secret = require('config').get('secret');
@@ -9,7 +9,8 @@ const UserSchema = new Schema(
     {
       firstName: {type: String, lowercase: true, max: 100, required: true},
       lastName: {type: String, lowercase: true, max: 100, required: true},
-      email: {type: String, lowercase: true, required: true, index: true},
+      email: {type: String, lowercase: true, required: true, index: true,
+        unique: true},
       hash: {type: String, required: true},
       salt: {type: String, required: true},
       dateOfBirth: {type: Date},
@@ -23,7 +24,7 @@ const UserSchema = new Schema(
     },
 );
 
-// UserSchema.plugin(uniqueValidator, {message: 'is already taken.'});
+UserSchema.plugin(uniqueValidator, {message: 'is already taken.'});
 
 UserSchema.methods.setPassword = function(password) {
   this.salt = crypto
@@ -43,13 +44,13 @@ UserSchema.methods.validPassword = function(password) {
 
 UserSchema.methods.generateJWT = function() {
   const today = new Date();
-  const exp = new Date(today);
-  exp.setDate(today.getDate() + 60);
+  const expirationDate = new Date(today);
+  expirationDate.setDate(today.getDate() + 60);
 
   return jwt.sign({
+    email: this.email,
     id: this._id,
-    username: this.username,
-    exp: parseInt(exp.getTime() / 1000),
+    exp: parseInt(expirationDate.getTime() / 1000, 10),
   }, secret);
 };
 

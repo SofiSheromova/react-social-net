@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const createError = require('http-errors');
 
 const config = require('config');
-const apiRoutes = require('./routes/api');
+const routes = require('./routes/index');
 const errorMiddleware = require('./middleware/error');
 const {logger, useRequestLogger} = require('./middleware/logger');
 
@@ -23,9 +23,12 @@ const publicDir = path.join(__dirname, 'client', 'public');
 useRequestLogger(app);
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(publicDir));
+app.use(bodyParser.urlencoded({
+  extended: true,
+}));
 app.use(bodyParser.json());
 
-apiRoutes(app);
+routes(app);
 
 app.all('*', (req, res, next) => {
   next(createError(404, `Can't find ${req.originalUrl} on this server!`));
